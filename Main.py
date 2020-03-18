@@ -18,7 +18,6 @@ from GUI.flowmanager import Ui_MainWindow
 
 class GUI_main(Ui_MainWindow):
     def __init__(self, mainwindow):
-        super.
         print(0)
 
 
