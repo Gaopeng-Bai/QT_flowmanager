@@ -23,6 +23,8 @@ class GUI_main(Ui_MainWindow):
         self.setupUi(main_window)
         self.ui_init()
 
+        self.switch_data = {"switch_ids": []}
+
     def ui_init(self):
         """
         Initialize UI function.
@@ -47,14 +49,15 @@ class GUI_main(Ui_MainWindow):
             QMessageBox.about(None, "No sever Info",
                               "Please tap in IP and Port first")
 
-    def show_server_info(self, ip, port):
+    def show_server_info(self, ip, port, req_key="switch_ids"):
         """
         execute program to get information from ryu server
+        :param req_key:
         :param ip:
         :param port:
         :return:
         """
-        r = get_info(ip, port, key="switch_ids")
+        r = get_info(ip, port, req_key)
 
         if r == "no response":
             QMessageBox.about(None, "Server no response",
@@ -69,6 +72,7 @@ class GUI_main(Ui_MainWindow):
                 data = json.loads(content)
                 for switch in data:
                     print(switch)
+                    self.switch_data[req_key].
                     # s = ""
                     # self.switch_desc_num.setText("Switch Desc:" + switch)
                     # for key in data[switch]:
