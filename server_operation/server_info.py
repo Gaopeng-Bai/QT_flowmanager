@@ -16,7 +16,7 @@ from requests.exceptions import ConnectionError
 def get_info(ip, port, key, id=0):
     url = {"switch_ids": "http://" + ip + ":" + port + "/data?list=switches",
            "switch_desc": "http://" + ip + ":" + port + "/data?switchdesc=<dpid>",
-           "Port_Desc": "http://" + ip + ":" + port + "/data?portdesc=<dpid>",
+           "port_desc": "http://" + ip + ":" + port + "/data?portdesc=<dpid>",
            "port_status": "http://" + ip + ":" + port + "/data?portstat=<dpid>",
            "flow_summary": "http://" + ip + ":" + port + "/data?flowsumm=<dpid>",
            "table_status": "http://" + ip + ":" + port + "/data?tablestat=<dpid>"}
