@@ -54,25 +54,31 @@ class GUI_main(Ui_MainWindow):
         :param port:
         :return:
         """
-        r = get_info(ip, port)
-        if r != "no response":
+        r = get_info(ip, port, key="switch_ids")
+
+        if r == "no response":
+            QMessageBox.about(None, "Server no response",
+                              "Please check this requests")
+        elif r == 0:
+            QMessageBox.about(None, "request error",
+                              "Requests command not exist")
+
+        elif r != "no response" and r != 0:
             if r.status_code == 200:
                 content = r.content.decode('utf8')
                 data = json.loads(content)
                 for switch in data:
-                    s = ""
-                    self.switch_desc_num.setText("Switch Desc:" + switch)
-                    for key in data[switch]:
-                        s = s + str(key) + ": " + data[switch][key]+"\n"
-
-                    self.switch_desc.setText(s)
+                    print(switch)
+                    # s = ""
+                    # self.switch_desc_num.setText("Switch Desc:" + switch)
+                    # for key in data[switch]:
+                    #     s = s + str(key) + ": " + data[switch][key]+"\n"
+                    #
+                    # self.switch_desc.setText(s)
 
             else:
                 QMessageBox.about(None, "request error",
                                   "Please check this requests")
-        else:
-            QMessageBox.about(None, "Server no response",
-                              "Please check this requests")
 
 
 if __name__ == '__main__':

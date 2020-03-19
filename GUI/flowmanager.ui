@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>918</width>
-    <height>681</height>
+    <width>979</width>
+    <height>716</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -99,16 +99,16 @@ color: rgb(115, 210, 22);</string>
          </spacer>
         </item>
         <item row="0" column="1">
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="status_button">
           <property name="text">
-           <string>PushButton</string>
+           <string>Status</string>
           </property>
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="flow_button">
           <property name="text">
-           <string>PushButton</string>
+           <string>Flow</string>
           </property>
          </widget>
         </item>
@@ -139,9 +139,9 @@ color: rgb(115, 210, 22);</string>
          </spacer>
         </item>
         <item row="4" column="1">
-         <widget class="QPushButton" name="pushButton_4">
+         <widget class="QPushButton" name="flow_control">
           <property name="text">
-           <string>PushButton</string>
+           <string>Flow Control</string>
           </property>
          </widget>
         </item>
@@ -183,28 +183,38 @@ color: rgb(115, 210, 22);</string>
      </layout>
     </item>
     <item>
+     <spacer name="horizontalSpacer_7">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
      <layout class="QGridLayout" name="showframe">
+      <item row="5" column="1">
+       <widget class="QTableView" name="flow_summary"/>
+      </item>
       <item row="2" column="1">
        <widget class="QLabel" name="switch_desc_num_4">
         <property name="text">
-         <string>Switch Desc</string>
+         <string>Port Desc</string>
         </property>
        </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QTextBrowser" name="switch_desc_3"/>
-      </item>
-      <item row="1" column="1">
-       <widget class="QTextBrowser" name="switch_desc_2"/>
       </item>
       <item row="0" column="1">
        <widget class="QLabel" name="switch_desc_num">
         <property name="text">
-         <string>Switch Desc</string>
+         <string>Switch IDs</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="6">
+      <item row="1" column="4">
        <spacer name="horizontalSpacer_6">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -217,51 +227,22 @@ color: rgb(115, 210, 22);</string>
         </property>
        </spacer>
       </item>
-      <item row="1" column="4">
-       <spacer name="horizontalSpacer_3">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="1" column="3">
-       <spacer name="horizontalSpacer_4">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="2" column="5">
+      <item row="2" column="3">
        <widget class="QLabel" name="switch_desc_num_2">
         <property name="text">
-         <string>Switch Desc</string>
+         <string>Port status</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="5">
+      <item row="1" column="3">
        <widget class="QTextBrowser" name="switch_desc"/>
       </item>
-      <item row="0" column="5">
+      <item row="0" column="3">
        <widget class="QLabel" name="switch_desc_num_3">
         <property name="text">
          <string>Switch Desc</string>
         </property>
        </widget>
-      </item>
-      <item row="3" column="5">
-       <widget class="QTextBrowser" name="switch_desc_4"/>
       </item>
       <item row="1" column="0">
        <spacer name="horizontalSpacer_5">
@@ -275,6 +256,32 @@ color: rgb(115, 210, 22);</string>
          </size>
         </property>
        </spacer>
+      </item>
+      <item row="5" column="3">
+       <widget class="QTableView" name="table_status"/>
+      </item>
+      <item row="3" column="1">
+       <widget class="QTableView" name="Port_Desc"/>
+      </item>
+      <item row="1" column="1">
+       <widget class="QTableWidget" name="switch_ids"/>
+      </item>
+      <item row="3" column="3">
+       <widget class="QTableView" name="port_status"/>
+      </item>
+      <item row="4" column="3">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Table status</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Flow summary</string>
+        </property>
+       </widget>
       </item>
       <item row="1" column="2">
        <spacer name="verticalSpacer_5">
@@ -298,7 +305,7 @@ color: rgb(115, 210, 22);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>918</width>
+     <width>979</width>
      <height>22</height>
     </rect>
    </property>

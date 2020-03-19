@@ -13,14 +13,25 @@ import requests
 from requests.exceptions import ConnectionError
 
 
-def get_info(ip, port):
+def get_info(ip, port, key, id=0):
+    url = {"switch_ids": "http://" + ip + ":" + port + "/data?list=switches",
+           "switch_desc": "http://" + ip + ":" + port + "/data?switchdesc=<dpid>",
+           "Port_Desc": "http://" + ip + ":" + port + "/data?portdesc=<dpid>",
+           "port_status": "http://" + ip + ":" + port + "/data?portstat=<dpid>",
+           "flow_summary": "http://" + ip + ":" + port + "/data?flowsumm=<dpid>",
+           "table_status": "http://" + ip + ":" + port + "/data?tablestat=<dpid>"}
 
-    url = "http://"+ip+":"+port+"/data?switchdesc=1"
+    if key in url:
+        if key == "switch_ids":
+            req_url = url[key]
+        else:
+            req_url = url[key].replace("<dpid>", str(id))
+        try:
+            r = requests.get(req_url)
 
-    try:
-        r = requests.get(url)
-
-    except ConnectionError as e:  # This is the correct syntax
-        print(e)
-        r = "no response"
-    return r
+        except ConnectionError as e:  # This is the correct syntax
+            print(e)
+            r = "no response"
+        return r
+    else:
+        return 0
