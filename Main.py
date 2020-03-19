@@ -42,12 +42,20 @@ class GUI_main(Ui_MainWindow):
     def show_switch_info(self, item):
         if self.ip != '' and self.port != '':
             switch_desc = self.get_info_by_keys(up_key="switch_desc", switch_id=item.text())
+            port_desc = self.get_info_by_keys(up_key="port_desc", switch_id=item.text())
+            port_status = self.get_info_by_keys(up_key="port_status", switch_id=item.text())
+            flow_summary = self.get_info_by_keys(up_key="flow_summary", switch_id=item.text())
+            table_status = self.get_info_by_keys(up_key="table_status", switch_id=item.text())
+            # fill the switch desc
             s = ""
             self.switch_desc_num.setText("Switch Desc:" + item.text())
             for key in switch_desc[item.text()]:
                 s = s + str(key) + ": " + switch_desc[item.text()][key]+"\n"
-
             self.switch_desc.setText(s)
+            # fill port desc
+            # fill port status
+            # fill flow summary
+            # fill table status
         else:
             QMessageBox.about(None, "No sever Info",
                               "Please tap in IP and Port first")
