@@ -263,9 +263,6 @@ color: rgb(115, 210, 22);</string>
       <item row="3" column="1">
        <widget class="QTableView" name="Port_Desc"/>
       </item>
-      <item row="1" column="1">
-       <widget class="QTableWidget" name="switch_ids"/>
-      </item>
       <item row="3" column="3">
        <widget class="QTableView" name="port_status"/>
       </item>
@@ -295,6 +292,9 @@ color: rgb(115, 210, 22);</string>
          </size>
         </property>
        </spacer>
+      </item>
+      <item row="1" column="1">
+       <widget class="QListWidget" name="switch_ids"/>
       </item>
      </layout>
     </item>

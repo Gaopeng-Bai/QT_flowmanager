@@ -30,34 +30,51 @@ class GUI_main(Ui_MainWindow):
         Initialize UI function.
         :return: none
         """
+        # connect group
         self.ip_adderss.setInputMask('000.000.000.000')
         self.ip_adderss.setText("127.0.0.1")
         self.port.setInputMask('00000')
         self.port.setText('8080')
         self.Connect_server.clicked.connect(self.connect_to_show)
+        # view
+        self.switch_ids.itemClicked.connect(self.show_switch_info)
+
+    def show_switch_info(self, item):
+        if self.ip != '' and self.port != '':
+            switch_desc = self.get_info_by_keys(up_key="switch_desc", switch_id=item.text())
+            s = ""
+            self.switch_desc_num.setText("Switch Desc:" + item.text())
+            for key in switch_desc[item.text()]:
+                s = s + str(key) + ": " + switch_desc[item.text()][key]+"\n"
+
+            self.switch_desc.setText(s)
+        else:
+            QMessageBox.about(None, "No sever Info",
+                              "Please tap in IP and Port first")
 
     def connect_to_show(self):
         """
         Connect button slot function
         :return: None
         """
-        ip = self.ip_adderss.text()
-        port = self.port.text()
-        if ip != '' and port != '':
-            self.show_server_info(ip, port)
+        self.ip = self.ip_adderss.text()
+        self.port = self.port.text()
+        if self.ip != '' and self.port != '':
+            switches = self.get_info_by_keys(up_key="switch_ids")
+            for switch in switches:
+                self.switch_ids.addItem(switch)
         else:
             QMessageBox.about(None, "No sever Info",
                               "Please tap in IP and Port first")
 
-    def show_server_info(self, ip, port, req_key="switch_ids"):
+    def get_info_by_keys(self, up_key, switch_id="0"):
         """
         execute program to get information from ryu server
-        :param req_key:
-        :param ip:
-        :param port:
+        :param switch_id:
+        :param up_key:
         :return:
         """
-        r = get_info(ip, port, req_key)
+        r = get_info(self.ip, self.port, up_key, switch_id)
 
         if r == "no response":
             QMessageBox.about(None, "Server no response",
@@ -70,16 +87,7 @@ class GUI_main(Ui_MainWindow):
             if r.status_code == 200:
                 content = r.content.decode('utf8')
                 data = json.loads(content)
-                for switch in data:
-                    print(switch)
-                    self.switch_data[req_key].
-                    # s = ""
-                    # self.switch_desc_num.setText("Switch Desc:" + switch)
-                    # for key in data[switch]:
-                    #     s = s + str(key) + ": " + data[switch][key]+"\n"
-                    #
-                    # self.switch_desc.setText(s)
-
+                return data
             else:
                 QMessageBox.about(None, "request error",
                                   "Please check this requests")

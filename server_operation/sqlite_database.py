@@ -23,6 +23,10 @@ class Database:
             self.create_db()
 
     def create_db(self):
+        """
+        create OPENFLOWS table of database if file not exist.
+        :return:
+        """
         conn = sqlite3.connect(self.path)
         # no matter the table is exist or not
         # conn.execute("DROP TABLE OPENFLOWS; ")
@@ -37,6 +41,16 @@ class Database:
         conn.close()
 
     def insert_db(self, s, sd, pd, ps, fs, ts):
+        """
+        insert new data into OPENFLOWS table of database
+        :param s: value of switch_ids
+        :param sd: value of switch_desc
+        :param pd: value of port_desc
+        :param ps: value of port_status
+        :param fs: value of flow_summary
+        :param ts: value of table_status
+        :return:
+        """
         conn = sqlite3.connect(self.path)
         sql = ''' insert into OPENFLOWS
                   (switch_ids, switch_desc, port_desc, port_status, flow_summary, table_status)
@@ -48,6 +62,10 @@ class Database:
         conn.close()
 
     def read_db(self):
+        """
+        read all data from OPENFLOWS table
+        :return:
+        """
         conn = sqlite3.connect(self.path)
         cursor = conn.execute("SELECT * from OPENFLOWS")
         for row in cursor:
@@ -60,6 +78,13 @@ class Database:
         conn.close()
 
     def update_db(self, up_key, value, switch_id):
+        """
+        replace old value to value of up_key (item) depend on switch_id
+        :param up_key: the item to be operated
+        :param value: new data
+        :param switch_id: ids
+        :return:
+        """
         conn = sqlite3.connect(self.path)
         c = conn.cursor()
         if up_key == "switch_desc":
@@ -76,6 +101,12 @@ class Database:
         conn.close()
 
     def check_db(self, up_key, switch_id):
+        """
+        check the value of up_key (item) depend on switch_id
+        :param up_key: item
+        :param switch_id: ids
+        :return:
+        """
         conn = sqlite3.connect(self.path)
         c = conn.cursor()
         if up_key == "switch_desc":
@@ -93,6 +124,11 @@ class Database:
         conn.close()
 
     def delete_db(self, switch_id):
+        """
+        delete sheet
+        :param switch_id:
+        :return:
+        """
         conn = sqlite3.connect(self.path)
         conn.execute("DELETE from OPENFLOWS where switch_ids= ?", switch_id)
         conn.commit()

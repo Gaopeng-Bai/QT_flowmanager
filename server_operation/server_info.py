@@ -13,7 +13,7 @@ import requests
 from requests.exceptions import ConnectionError
 
 
-def get_info(ip, port, key, id=0):
+def get_info(ip, port, key, id):
     url = {"switch_ids": "http://" + ip + ":" + port + "/data?list=switches",
            "switch_desc": "http://" + ip + ":" + port + "/data?switchdesc=<dpid>",
            "port_desc": "http://" + ip + ":" + port + "/data?portdesc=<dpid>",
