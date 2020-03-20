@@ -53,8 +53,10 @@ def custom_model(data):
 
     for i, row in enumerate(data):
         for j, key in enumerate(row):
-            item = QStandardItem(row[key])
-            model.setItem(int(i), int(j), item)
+            index = model.index(int(i), int(j))
+            model.setData(index, row[key])
+            # item = QStandardItem(row[key])
+            # model.setItem(int(i), int(j), item)
     return model
 
 
@@ -65,11 +67,20 @@ class GUI_main(QMainWindow, Ui_MainWindow):
         self.ui_init()
 
         self.cache = None
-
         self.Info_present_window = Info_present_window()
+
+        # default window
+        self.home_window()
+
+    def home_window(self):
         self.subwindows.addWidget(self.Info_present_window)
         self.Info_present_window.show()
-        self.switch_data = {"switch_ids": []}
+
+    def flow_window(self):
+        pass
+
+    def flow_control_window(self):
+        pass
 
     def ui_init(self):
         """
@@ -82,6 +93,12 @@ class GUI_main(QMainWindow, Ui_MainWindow):
         self.port.setInputMask('00000')
         self.port.setText('8080')
         self.Connect_server.clicked.connect(self.connect_to_show)
+        # status button connect to home window
+        self.status_button.clicked.connect(self.home_window)
+        # flow button connect to flow viewer
+        self.flow_button.clicked.connect(self.flow_window)
+        # flow control button
+        self.flow_control.clicked.connect(self.flow_control_window)
 
     def connect_to_show(self):
         """

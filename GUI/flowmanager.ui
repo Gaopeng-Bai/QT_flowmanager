@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(85, 87, 83);
+   <string notr="true">background-color: rgb(6, 22, 34);
 color: rgb(115, 210, 22);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -77,7 +77,7 @@ color: rgb(115, 210, 22);</string>
       <item>
        <layout class="QGridLayout" name="gridLayout_7">
         <item row="5" column="1">
-         <widget class="QPushButton" name="flow_control_4">
+         <widget class="QPushButton" name="flow_control">
           <property name="text">
            <string>Flow Control</string>
           </property>
@@ -110,7 +110,7 @@ color: rgb(115, 210, 22);</string>
          </spacer>
         </item>
         <item row="1" column="1">
-         <widget class="QPushButton" name="status_button_4">
+         <widget class="QPushButton" name="status_button">
           <property name="text">
            <string>Status</string>
           </property>
@@ -130,7 +130,7 @@ color: rgb(115, 210, 22);</string>
          </spacer>
         </item>
         <item row="3" column="1">
-         <widget class="QPushButton" name="flow_button_4">
+         <widget class="QPushButton" name="flow_button">
           <property name="text">
            <string>Flow</string>
           </property>
