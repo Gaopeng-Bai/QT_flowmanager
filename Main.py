@@ -35,9 +35,11 @@ def get_info_by_keys(req_cache, up_key, switch_id="0"):
     if r == "no response":
         QMessageBox.about(None, "Server no response",
                           "Please check this requests")
+        return 0
     elif r == 0:
         QMessageBox.about(None, "request error",
                           "Requests command not exist")
+        return 0
 
     elif r != "no response" and r != 0:
         if r.status_code == 200:
@@ -47,6 +49,7 @@ def get_info_by_keys(req_cache, up_key, switch_id="0"):
         else:
             QMessageBox.about(None, "request error",
                               "Please check this requests")
+            return 0
 
 
 def custom_model(data):
@@ -116,8 +119,9 @@ class GUI_main(QMainWindow, Ui_MainWindow):
             self.cache = req_server(ip=ip, port=port)
             switches = get_info_by_keys(
                 req_cache=self.cache, up_key="switch_ids")
-            for switch in switches:
-                self.Info_present_window.switch_ids.addItem(switch)
+            if switches:
+                for switch in switches:
+                    self.Info_present_window.switch_ids.addItem(switch)
         else:
             QMessageBox.about(None, "No sever Info",
                               "Please tap in IP and Port first")
