@@ -12,17 +12,63 @@
 import sys
 import json
 
+from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 
 from GUI.flowmanager import Ui_MainWindow
-from server_operation.server_info import get_info
+from GUI.home import Ui_info_present
+from server_operation.server_info import req_server
 
 
-class GUI_main(Ui_MainWindow):
+def get_info_by_keys(req_cache, up_key, switch_id="0"):
+    """
+    execute program to get information from ryu server
+    :param req_cache: the req_server object carry with ip address and port.
+    :param switch_id: the id of switch to be requested.
+    :param up_key: data item
+    :return: the data from server response.
+    """
+    r = req_cache.get_info(up_key, switch_id)
+
+    if r == "no response":
+        QMessageBox.about(None, "Server no response",
+                          "Please check this requests")
+    elif r == 0:
+        QMessageBox.about(None, "request error",
+                          "Requests command not exist")
+
+    elif r != "no response" and r != 0:
+        if r.status_code == 200:
+            content = r.content.decode('utf8')
+            data = json.loads(content)
+            return data
+        else:
+            QMessageBox.about(None, "request error",
+                              "Please check this requests")
+
+
+def custom_model(data):
+    model = QStandardItemModel(len(data), len(data[0]))
+    model.setHorizontalHeaderLabels(data[0].keys())
+
+    for i, row in enumerate(data):
+        for j, key in enumerate(row):
+            item = QStandardItem(row[key])
+            model.setItem(int(i), int(j), item)
+    return model
+
+
+class GUI_main(QMainWindow, Ui_MainWindow):
     def __init__(self, main_window):
+        super(GUI_main, self).__init__()
         self.setupUi(main_window)
         self.ui_init()
 
+        self.cache = None
+
+        self.Info_present_window = Info_present_window()
+        self.subwindows.addWidget(self.Info_present_window)
+        self.Info_present_window.show()
         self.switch_data = {"switch_ids": []}
 
     def ui_init(self):
@@ -36,69 +82,60 @@ class GUI_main(Ui_MainWindow):
         self.port.setInputMask('00000')
         self.port.setText('8080')
         self.Connect_server.clicked.connect(self.connect_to_show)
-        # view
-        self.switch_ids.itemClicked.connect(self.show_switch_info)
-
-    def show_switch_info(self, item):
-        if self.ip != '' and self.port != '':
-            switch_desc = self.get_info_by_keys(up_key="switch_desc", switch_id=item.text())
-            port_desc = self.get_info_by_keys(up_key="port_desc", switch_id=item.text())
-            port_status = self.get_info_by_keys(up_key="port_status", switch_id=item.text())
-            flow_summary = self.get_info_by_keys(up_key="flow_summary", switch_id=item.text())
-            table_status = self.get_info_by_keys(up_key="table_status", switch_id=item.text())
-            # fill the switch desc
-            s = ""
-            self.switch_desc_num.setText("Switch Desc:" + item.text())
-            for key in switch_desc[item.text()]:
-                s = s + str(key) + ": " + switch_desc[item.text()][key]+"\n"
-            self.switch_desc.setText(s)
-            # fill port desc
-            # fill port status
-            # fill flow summary
-            # fill table status
-        else:
-            QMessageBox.about(None, "No sever Info",
-                              "Please tap in IP and Port first")
 
     def connect_to_show(self):
         """
         Connect button slot function
         :return: None
         """
-        self.ip = self.ip_adderss.text()
-        self.port = self.port.text()
-        if self.ip != '' and self.port != '':
-            switches = self.get_info_by_keys(up_key="switch_ids")
+        ip = self.ip_adderss.text()
+        port = self.port.text()
+        if ip != '' and port != '':
+            self.cache = req_server(ip=ip, port=port)
+            switches = get_info_by_keys(req_cache=self.cache, up_key="switch_ids")
             for switch in switches:
-                self.switch_ids.addItem(switch)
+                self.Info_present_window.switch_ids.addItem(switch)
         else:
             QMessageBox.about(None, "No sever Info",
                               "Please tap in IP and Port first")
 
-    def get_info_by_keys(self, up_key, switch_id="0"):
-        """
-        execute program to get information from ryu server
-        :param switch_id:
-        :param up_key:
-        :return:
-        """
-        r = get_info(self.ip, self.port, up_key, switch_id)
 
-        if r == "no response":
-            QMessageBox.about(None, "Server no response",
-                              "Please check this requests")
-        elif r == 0:
-            QMessageBox.about(None, "request error",
-                              "Requests command not exist")
+class Info_present_window(QMainWindow, Ui_info_present):
 
-        elif r != "no response" and r != 0:
-            if r.status_code == 200:
-                content = r.content.decode('utf8')
-                data = json.loads(content)
-                return data
-            else:
-                QMessageBox.about(None, "request error",
-                                  "Please check this requests")
+    def __init__(self):
+        super(Info_present_window, self).__init__()
+        self.setupUi(self)
+        # view
+        self.switch_ids.itemClicked.connect(self.show_switch_info)
+
+    def show_switch_info(self, item):
+        if ui.cache is not None:
+            switch_desc = get_info_by_keys(ui.cache, up_key="switch_desc", switch_id=item.text())
+            port_desc = get_info_by_keys(ui.cache, up_key="port_desc", switch_id=item.text())
+            port_status = get_info_by_keys(ui.cache, up_key="port_status", switch_id=item.text())
+            flow_summary = get_info_by_keys(ui.cache, up_key="flow_summary", switch_id=item.text())
+            table_status = get_info_by_keys(ui.cache,up_key="table_status", switch_id=item.text())
+            # fill the switch desc
+            s = ""
+            self.switch_desc_num.setText("Switch Desc:" + item.text())
+            for key in switch_desc[item.text()]:
+                s = s + str(key) + ": " + switch_desc[item.text()][key] + "\n"
+            self.switch_desc.setText(s)
+            # fill port desc
+            self.port_desc.setModel(custom_model(port_desc[item.text()]))
+            # fill port status
+            self.port_status.setModel(custom_model(port_status[item.text()]))
+            # fill flow summary
+            self.flow_summary.setModel(custom_model(flow_summary[item.text()]))
+            # fill table status
+            self.table_status.setModel(custom_model(table_status[item.text()]))
+        else:
+            QMessageBox.about(None, "No sever Info",
+                              "Please connect available server first")
+
+    # Exit function, you can create an event in the code of the child window that points to this function.
+    def close(self):
+        self.hide()
 
 
 if __name__ == '__main__':
