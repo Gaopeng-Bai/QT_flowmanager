@@ -17,6 +17,7 @@ class Database:
     """
     sqlite3 database operation
     """
+
     def __init__(self, path="../flow.db"):
         self.path = path
         if not os.path.isfile(path):
@@ -57,7 +58,8 @@ class Database:
                   values
                   (:s, :sd, :pd, :ps, :fs, :ts)'''
 
-        conn.execute(sql, {'s': s, 'sd': sd, 'pd': pd, 'ps': ps, 'fs': fs, 'ts': ts})
+        conn.execute(sql, {'s': s, 'sd': sd, 'pd': pd,
+                           'ps': ps, 'fs': fs, 'ts': ts})
         conn.commit()
         conn.close()
 
@@ -88,15 +90,24 @@ class Database:
         conn = sqlite3.connect(self.path)
         c = conn.cursor()
         if up_key == "switch_desc":
-            c.execute('UPDATE OPENFLOWS set switch_desc = ? WHERE switch_ids= ?', (value, switch_id))
+            c.execute(
+                'UPDATE OPENFLOWS set switch_desc = ? WHERE switch_ids= ?', (value, switch_id))
         elif up_key == "port_desc":
-            c.execute('UPDATE OPENFLOWS set port_desc = ? WHERE switch_ids= ?', (value, switch_id))
+            c.execute(
+                'UPDATE OPENFLOWS set port_desc = ? WHERE switch_ids= ?', (value, switch_id))
         elif up_key == "port_status":
-            c.execute('UPDATE OPENFLOWS set port_status = ? WHERE switch_ids= ?', (value, switch_id))
+            c.execute(
+                'UPDATE OPENFLOWS set port_status = ? WHERE switch_ids= ?', (value, switch_id))
         elif up_key == "flow_summary":
-            c.execute('UPDATE OPENFLOWS set flow_summary = ? WHERE switch_ids= ?', (value, switch_id))
+            c.execute(
+                'UPDATE OPENFLOWS set flow_summary = ? WHERE switch_ids= ?',
+                (value,
+                 switch_id))
         elif up_key == "table_status":
-            c.execute('UPDATE OPENFLOWS set table_status = ? WHERE switch_ids= ?', (value, switch_id))
+            c.execute(
+                'UPDATE OPENFLOWS set table_status = ? WHERE switch_ids= ?',
+                (value,
+                 switch_id))
         conn.commit()
         conn.close()
 
@@ -110,15 +121,25 @@ class Database:
         conn = sqlite3.connect(self.path)
         c = conn.cursor()
         if up_key == "switch_desc":
-            results = c.execute("SELECT switch_desc from OPENFLOWS WHERE switch_ids= ?", switch_id)
+            results = c.execute(
+                "SELECT switch_desc from OPENFLOWS WHERE switch_ids= ?",
+                switch_id)
         elif up_key == "port_desc":
-            results = c.execute("SELECT port_desc from OPENFLOWS WHERE switch_ids= ?", switch_id)
+            results = c.execute(
+                "SELECT port_desc from OPENFLOWS WHERE switch_ids= ?",
+                switch_id)
         elif up_key == "port_status":
-            results = c.execute("SELECT port_status from OPENFLOWS WHERE switch_ids= ?", switch_id)
+            results = c.execute(
+                "SELECT port_status from OPENFLOWS WHERE switch_ids= ?",
+                switch_id)
         elif up_key == "flow_summary":
-            results = c.execute("SELECT flow_summary from OPENFLOWS WHERE switch_ids= ?", switch_id)
+            results = c.execute(
+                "SELECT flow_summary from OPENFLOWS WHERE switch_ids= ?",
+                switch_id)
         elif up_key == "table_status":
-            results = c.execute("SELECT table_status from OPENFLOWS WHERE switch_ids= ?", switch_id)
+            results = c.execute(
+                "SELECT table_status from OPENFLOWS WHERE switch_ids= ?",
+                switch_id)
         for row in results:
             print(row)
         conn.close()

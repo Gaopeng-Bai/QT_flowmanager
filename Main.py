@@ -17,6 +17,8 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 
 from GUI.flowmanager import Ui_MainWindow
 from GUI.home import Ui_info_present
+from GUI.flow_control import Ui_flow_control
+
 from server_operation.server_info import req_server
 
 
@@ -55,8 +57,6 @@ def custom_model(data):
         for j, key in enumerate(row):
             index = model.index(int(i), int(j))
             model.setData(index, row[key])
-            # item = QStandardItem(row[key])
-            # model.setItem(int(i), int(j), item)
     return model
 
 
@@ -68,19 +68,24 @@ class GUI_main(QMainWindow, Ui_MainWindow):
 
         self.cache = None
         self.Info_present_window = Info_present_window()
+        self.flow_control_window_present = flow_control_window()
+        self.subwindows.addWidget(self.Info_present_window)
+        self.subwindows.addWidget(self.flow_control_window_present)
 
         # default window
         self.home_window()
 
     def home_window(self):
-        self.subwindows.addWidget(self.Info_present_window)
+        self.flow_control_window_present.close()
         self.Info_present_window.show()
 
     def flow_window(self):
         pass
 
     def flow_control_window(self):
-        pass
+        self.Info_present_window.close()
+
+        self.flow_control_window_present.show()
 
     def ui_init(self):
         """
@@ -109,12 +114,24 @@ class GUI_main(QMainWindow, Ui_MainWindow):
         port = self.port.text()
         if ip != '' and port != '':
             self.cache = req_server(ip=ip, port=port)
-            switches = get_info_by_keys(req_cache=self.cache, up_key="switch_ids")
+            switches = get_info_by_keys(
+                req_cache=self.cache, up_key="switch_ids")
             for switch in switches:
                 self.Info_present_window.switch_ids.addItem(switch)
         else:
             QMessageBox.about(None, "No sever Info",
                               "Please tap in IP and Port first")
+
+
+class flow_control_window(QMainWindow, Ui_flow_control):
+
+    def __init__(self):
+        super(flow_control_window, self).__init__()
+        self.setupUi(self)
+        # view
+
+    def close(self):
+        self.hide()
 
 
 class Info_present_window(QMainWindow, Ui_info_present):
@@ -127,11 +144,16 @@ class Info_present_window(QMainWindow, Ui_info_present):
 
     def show_switch_info(self, item):
         if ui.cache is not None:
-            switch_desc = get_info_by_keys(ui.cache, up_key="switch_desc", switch_id=item.text())
-            port_desc = get_info_by_keys(ui.cache, up_key="port_desc", switch_id=item.text())
-            port_status = get_info_by_keys(ui.cache, up_key="port_status", switch_id=item.text())
-            flow_summary = get_info_by_keys(ui.cache, up_key="flow_summary", switch_id=item.text())
-            table_status = get_info_by_keys(ui.cache,up_key="table_status", switch_id=item.text())
+            switch_desc = get_info_by_keys(
+                ui.cache, up_key="switch_desc", switch_id=item.text())
+            port_desc = get_info_by_keys(
+                ui.cache, up_key="port_desc", switch_id=item.text())
+            port_status = get_info_by_keys(
+                ui.cache, up_key="port_status", switch_id=item.text())
+            flow_summary = get_info_by_keys(
+                ui.cache, up_key="flow_summary", switch_id=item.text())
+            table_status = get_info_by_keys(
+                ui.cache, up_key="table_status", switch_id=item.text())
             # fill the switch desc
             s = ""
             self.switch_desc_num.setText("Switch Desc:" + item.text())
@@ -150,7 +172,8 @@ class Info_present_window(QMainWindow, Ui_info_present):
             QMessageBox.about(None, "No sever Info",
                               "Please connect available server first")
 
-    # Exit function, you can create an event in the code of the child window that points to this function.
+    # Exit function, you can create an event in the code of the child window
+    # that points to this function.
     def close(self):
         self.hide()
 
