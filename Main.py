@@ -69,8 +69,8 @@ class GUI_main(QMainWindow, Ui_MainWindow):
         self.cache = None
         self.Info_present_window = Info_present_window()
         self.flow_control_window_present = flow_control_window()
-        self.subwindows.addWidget(self.Info_present_window)
         self.subwindows.addWidget(self.flow_control_window_present)
+        self.subwindows.addWidget(self.Info_present_window)
 
         # default window
         self.home_window()
@@ -84,7 +84,7 @@ class GUI_main(QMainWindow, Ui_MainWindow):
 
     def flow_control_window(self):
         self.Info_present_window.close()
-
+        self.flow_control_window_present.init_ui()
         self.flow_control_window_present.show()
 
     def ui_init(self):
@@ -128,7 +128,20 @@ class flow_control_window(QMainWindow, Ui_flow_control):
     def __init__(self):
         super(flow_control_window, self).__init__()
         self.setupUi(self)
-        # view
+        self.submit.clicked.connect(self.submit_button)
+
+    def init_ui(self):
+        num = main_ui.Info_present_window.switch_ids.count()
+        if num > 0:
+            for i in range(num):
+                self.switch_id_flow.addItem("SW_"+main_ui.Info_present_window.switch_ids.item(i).text())
+
+        else:
+            QMessageBox.about(None, "No switch operable",
+                              "Please try to connect a server")
+
+    def submit_button(self):
+        pass
 
     def close(self):
         self.hide()
@@ -143,17 +156,17 @@ class Info_present_window(QMainWindow, Ui_info_present):
         self.switch_ids.itemClicked.connect(self.show_switch_info)
 
     def show_switch_info(self, item):
-        if ui.cache is not None:
+        if main_ui.cache is not None:
             switch_desc = get_info_by_keys(
-                ui.cache, up_key="switch_desc", switch_id=item.text())
+                main_ui.cache, up_key="switch_desc", switch_id=item.text())
             port_desc = get_info_by_keys(
-                ui.cache, up_key="port_desc", switch_id=item.text())
+                main_ui.cache, up_key="port_desc", switch_id=item.text())
             port_status = get_info_by_keys(
-                ui.cache, up_key="port_status", switch_id=item.text())
+                main_ui.cache, up_key="port_status", switch_id=item.text())
             flow_summary = get_info_by_keys(
-                ui.cache, up_key="flow_summary", switch_id=item.text())
+                main_ui.cache, up_key="flow_summary", switch_id=item.text())
             table_status = get_info_by_keys(
-                ui.cache, up_key="table_status", switch_id=item.text())
+                main_ui.cache, up_key="table_status", switch_id=item.text())
             # fill the switch desc
             s = ""
             self.switch_desc_num.setText("Switch Desc:" + item.text())
@@ -181,7 +194,7 @@ class Info_present_window(QMainWindow, Ui_info_present):
 if __name__ == '__main__':
     app = QApplication(sys.argv)  # initialize application
     MainWindow = QMainWindow()  # Create main window
-    ui = GUI_main(MainWindow)  # Create UI window
+    main_ui = GUI_main(MainWindow)  # Create UI window
     MainWindow.show()  # present window
     # It returns 0 after the message loop ends, and then calls sys.exit (0) to
     # exit the program
