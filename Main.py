@@ -76,7 +76,7 @@ def check_to_line_edit(line):
     :return: the text of line edit.
     """
     if line.text() == "":
-        return 0
+        return 1
     else:
         return line.text()
 
