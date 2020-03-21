@@ -12,8 +12,8 @@
 import sys
 import json
 
-from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 
 from GUI.flowmanager import Ui_MainWindow
 from GUI.home import Ui_info_present
@@ -127,25 +127,113 @@ class GUI_main(QMainWindow, Ui_MainWindow):
                               "Please tap in IP and Port first")
 
 
+def check_to_line_edit(line):
+    """
+    if the line edit is empty, set 0 by default.
+    :param line: the object of line edit
+    :return: the text of line edit.
+    """
+    if line.text() == "":
+        return 0
+    else:
+        return line.text()
+
+
 class flow_control_window(QMainWindow, Ui_flow_control):
 
     def __init__(self):
         super(flow_control_window, self).__init__()
         self.setupUi(self)
         self.submit.clicked.connect(self.submit_button)
+        # operation
+        self.add.setChecked(True)
+        self.operation = 'add'
+        self.add.toggled.connect(lambda: self.btn_state(self.add))
+        self.modify.toggled.connect(lambda: self.btn_state(self.modify))
+        self.modify_strict.toggled.connect(
+            lambda: self.btn_state(self.modify_strict))
+        self.delete_flow.toggled.connect(
+            lambda: self.btn_state(self.delete_flow))
+        self.delete_strict.toggled.connect(
+            lambda: self.btn_state(self.delete_strict))
+        # setValidator
+        self.priority.setValidator(QIntValidator(0, 100, self))
+        self.idle_timeout.setValidator(QIntValidator(0, 1000000, self))
+        self.hard_timeout.setValidator(QIntValidator(0, 1000000, self))
+        self.cookie.setValidator(QDoubleValidator(self))
+        self.cookie_mask.setValidator(QDoubleValidator(self))
+        self.output_port.setValidator(QIntValidator(-1, 100000, self))
+        self.output_group.setValidator(QIntValidator(-1, 100000, self))
+        self.meter_id.setValidator(QIntValidator(-1, 100000, self))
+
+        self.goto_table.setValidator(QIntValidator(0, 100000, self))
 
     def init_ui(self):
         num = main_ui.Info_present_window.switch_ids.count()
         if num > 0:
             for i in range(num):
-                self.switch_id_flow.addItem("SW_"+main_ui.Info_present_window.switch_ids.item(i).text())
+                self.switch_id_flow.addItem(
+                    "SW_" + main_ui.Info_present_window.switch_ids.item(i).text())
 
         else:
             QMessageBox.about(None, "No switch operable",
                               "Please try to connect a server")
 
     def submit_button(self):
-        pass
+        """
+        submit request with current form.
+        :return:
+        """
+        id = self.switch_id_flow.currentText()
+        if id != '':
+            main_ui.cache.payload["dpid"] = id[3:]
+            main_ui.cache.payload["operation"] = self.operation
+            main_ui.cache.payload["table_id"] = self.table_id_flow.value()
+
+            main_ui.cache.payload["priority"] = check_to_line_edit(self.priority)
+            main_ui.cache.payload["idle_timeout"] = check_to_line_edit(self.idle_timeout)
+            main_ui.cache.payload["hard_timeout"] = check_to_line_edit(self.hard_timeout)
+            main_ui.cache.payload["cookie"] = check_to_line_edit(self.cookie)
+            main_ui.cache.payload["cookie_mask"] = check_to_line_edit(self.cookie_mask)
+            main_ui.cache.payload["out_port"] = check_to_line_edit(self.output_port)
+            main_ui.cache.payload["out_group"] = check_to_line_edit(self.output_group)
+            main_ui.cache.payload["meter_id"] = check_to_line_edit(self.meter_id)
+            main_ui.cache.payload["metadata"] = check_to_line_edit(self.write_metadate)
+            main_ui.cache.payload["metadata_mask"] = check_to_line_edit(self.metadate_mask)
+            main_ui.cache.payload["goto"] = check_to_line_edit(self.goto_table)
+
+            main_ui.cache.payload["matchcheckbox"] = self.match_any.isChecked()
+            main_ui.cache.payload["clearactions"] = self.clear_actions.isChecked()
+            main_ui.cache.payload["SEND_FLOW_REM"] = self.send_flowremoved_msg.isChecked()
+            main_ui.cache.payload["CHECK_OVERLAP"] = self.check_overlapping.isChecked()
+            main_ui.cache.payload["RESET_COUNTS"] = self.reset_counts.isChecked()
+            main_ui.cache.payload["NO_PKT_COUNTS"] = self.do_not_count_packets.isChecked()
+            main_ui.cache.payload["NO_BYT_COUNTS"] = self.do_not_count_bytes.isChecked()
+
+            main_ui.cache.payload["match"] = {}
+            main_ui.cache.payload["apply"] = []
+            main_ui.cache.payload["write"] = {}
+
+            response = main_ui.cache.post_flow_control()
+            if response.status_code == 200:
+                QMessageBox.about(None, "Done!!",
+                                  "Message sent successfully")
+            else:
+                QMessageBox.about(None, "Warning",
+                                  "Message sent failed")
+
+        else:
+            QMessageBox.about(None, "No switch operable",
+                              "Please try to connect a server")
+
+    def btn_state(self, btn):
+        """
+        current operation for flow
+        :param btn: radio button
+        :return: the operation
+        """
+        if btn.isChecked():
+            self.operation = btn.text()
 
     def close(self):
         self.hide()
