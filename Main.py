@@ -18,6 +18,7 @@ from PyQt5.QtWidgets import *
 from GUI.flowmanager import Ui_MainWindow
 from GUI.home import Ui_info_present
 from GUI.flow_control import Ui_flow_control
+from GUI.flow import Ui_flow
 
 from server_operation.server_info import req_server
 
@@ -35,11 +36,11 @@ def get_info_by_keys(req_cache, up_key, switch_id="0"):
     if r == "no response":
         QMessageBox.about(None, "Server no response",
                           "Please check this requests")
-        return 0
+        return False
     elif r == 0:
         QMessageBox.about(None, "request error",
                           "Requests command not exist")
-        return 0
+        return False
 
     elif r != "no response" and r != 0:
         if r.status_code == 200:
@@ -47,9 +48,9 @@ def get_info_by_keys(req_cache, up_key, switch_id="0"):
             data = json.loads(content)
             return data
         else:
-            QMessageBox.about(None, "request error",
+            QMessageBox.about(None, "request error"+str(r.status_code),
                               "Please check this requests")
-            return 0
+            return False
 
 
 def custom_model(data):
@@ -64,7 +65,7 @@ def custom_model(data):
     for i, row in enumerate(data):
         for j, key in enumerate(row):
             index = model.index(int(i), int(j))
-            model.setData(index, row[key])
+            model.setData(index, str(row[key]))
     return model
 
 
@@ -88,23 +89,29 @@ class GUI_main(QMainWindow, Ui_MainWindow):
 
         self.cache = None
         self.Info_present_window = Info_present_window()
+        self.flows_viewer = flow_present_window()
         self.flow_control_window_present = flow_control_window()
         self.subwindows.addWidget(self.flow_control_window_present)
         self.subwindows.addWidget(self.Info_present_window)
+        self.subwindows.addWidget(self.flows_viewer)
 
         # default window
         self.home_window()
 
     def home_window(self):
         self.flow_control_window_present.close()
+        self.flows_viewer.close()
         self.Info_present_window.show()
 
     def flow_window(self):
-        pass
+        self.Info_present_window.close()
+        self.flow_control_window_present.close()
+        self.flows_viewer.show_flows()
+        self.flows_viewer.show()
 
     def flow_control_window(self):
+        self.flows_viewer.close()
         self.Info_present_window.close()
-        self.flow_control_window_present.init_ui()
         self.flow_control_window_present.show()
 
     def ui_init(self):
@@ -133,12 +140,19 @@ class GUI_main(QMainWindow, Ui_MainWindow):
         ip = self.ip_adderss.text()
         port = self.port.text()
         if ip != '' and port != '':
+
             self.cache = req_server(ip=ip, port=port)
             switches = get_info_by_keys(
                 req_cache=self.cache, up_key="switch_ids")
+
             if switches:
+                self.Info_present_window.switch_ids.clear()
+                self.flows_viewer.flow_switch_ids.clear()
+                self.flow_control_window_present.switch_id_flow.clear()
                 for switch in switches:
                     self.Info_present_window.switch_ids.addItem(switch)
+                    self.flows_viewer.flow_switch_ids.addItem("SW_" + switch)
+                    self.flow_control_window_present.switch_id_flow.addItem("SW_" + switch)
         else:
             QMessageBox.about(None, "No sever Info",
                               "Please tap in IP and Port first")
@@ -173,17 +187,6 @@ class flow_control_window(QMainWindow, Ui_flow_control):
 
         self.goto_table.setValidator(QIntValidator(0, 100000, self))
 
-    def init_ui(self):
-        num = main_ui.Info_present_window.switch_ids.count()
-        if num > 0:
-            for i in range(num):
-                self.switch_id_flow.addItem(
-                    "SW_" + main_ui.Info_present_window.switch_ids.item(i).text())
-
-        else:
-            QMessageBox.about(None, "No switch operable",
-                              "Please try to connect a server")
-
     def submit_button(self):
         """
         submit request with current form.
@@ -191,7 +194,7 @@ class flow_control_window(QMainWindow, Ui_flow_control):
         """
         id = self.switch_id_flow.currentText()
         if id != '':
-            main_ui.cache.payload["dpid"] = id[3:]
+            main_ui.cache.payload["dpid"] = int(id[3:])
             main_ui.cache.payload["operation"] = self.operation
             main_ui.cache.payload["table_id"] = self.table_id_flow.value()
 
@@ -254,6 +257,29 @@ class flow_control_window(QMainWindow, Ui_flow_control):
         """
         if btn.isChecked():
             self.operation = btn.text()
+
+    def close(self):
+        self.hide()
+
+
+class flow_present_window(QMainWindow, Ui_flow):
+
+    def __init__(self):
+        super(flow_present_window, self).__init__()
+        self.setupUi(self)
+        # view
+        self.flow_switch_ids.activated.connect(self.show_flows)
+
+    def show_flows(self):
+        id = self.flow_switch_ids.currentText()[3:]
+        if main_ui.cache is not None:
+            flows = get_info_by_keys(
+                main_ui.cache, up_key="flows", switch_id=id)
+            if len(flows[str(id)]) != 0:
+                self.flow_table_view.setModel(custom_model(flows[str(id)]))
+        else:
+            QMessageBox.about(None, "No sever Info",
+                              "Please connect available server first")
 
     def close(self):
         self.hide()

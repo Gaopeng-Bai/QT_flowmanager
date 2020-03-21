@@ -9,7 +9,7 @@
 @time: 3/18/20 4:38 PM
 @desc:
 """
-import json
+import demjson
 
 import requests
 from requests.exceptions import ConnectionError
@@ -23,7 +23,7 @@ class req_server:
             "dpid": 1,
             "operation": "add",
             "table_id": 0,
-            "priority": 0,
+            "priority": 23,
             "idle_timeout": 0,
             "hard_timeout": 0,
             "cookie": 0,
@@ -34,20 +34,26 @@ class req_server:
             "metadata": 0,
             "metadata_mask": 0,
             "goto": 0,
-            "matchcheckbox": bool,
-            "clearactions": bool,
-            "SEND_FLOW_REM": bool,
-            "CHECK_OVERLAP": bool,
-            "RESET_COUNTS": bool,
-            "NO_PKT_COUNTS": bool,
-            "NO_BYT_COUNTS": bool,
+            "matchcheckbox": False,
+            "clearactions": False,
+            "SEND_FLOW_REM": False,
+            "CHECK_OVERLAP": False,
+            "RESET_COUNTS": False,
+            "NO_PKT_COUNTS": False,
+            "NO_BYT_COUNTS": False,
             "match": {},
             "apply": [],
             "write": {}
         }
+        print(self.payload)
 
     def get_info(self, key, ids):
         url = {
+            "flows": "http://" +
+                     self.ip +
+                     ":" +
+                     self.port +
+                     "/status?status=flows&dpid=<dpid>",
             "switch_ids": "http://" +
                           self.ip +
                           ":" +
@@ -98,14 +104,16 @@ class req_server:
         url = "http://" + self.ip + ":" + self.port + "/flowform"
         header = {
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) '
-            'Chrome/80.0.3987.132 Safari/537.36 ',
+                          'Chrome/80.0.3987.132 Safari/537.36 ',
             'Connection': 'keep-alive',
             'Accept-Encoding': 'gzip, deflate, br',
             'Content-Type': 'application/x-www-form-urlencoded;charset = UTF-8'}
 
+        print(self.payload)
+
         try:
             r = requests.post(
-                url, data=json.dumps(
+                url, data=demjson.encode(
                     self.payload), headers=header)
         except ConnectionError as e:  # This is the correct syntax
             print(e)

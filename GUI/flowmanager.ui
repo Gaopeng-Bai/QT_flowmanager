@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1045</width>
-    <height>794</height>
+    <width>1101</width>
+    <height>795</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -51,6 +51,11 @@ color: rgb(115, 210, 22);</string>
            </item>
            <item row="2" column="1">
             <widget class="QPushButton" name="Connect_server">
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string>Connect</string>
              </property>
@@ -78,6 +83,11 @@ color: rgb(115, 210, 22);</string>
        <layout class="QGridLayout" name="gridLayout_7">
         <item row="5" column="1">
          <widget class="QPushButton" name="flow_control">
+          <property name="font">
+           <font>
+            <pointsize>18</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>Flow Control</string>
           </property>
@@ -111,6 +121,11 @@ color: rgb(115, 210, 22);</string>
         </item>
         <item row="1" column="1">
          <widget class="QPushButton" name="status_button">
+          <property name="font">
+           <font>
+            <pointsize>18</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>Status</string>
           </property>
@@ -131,6 +146,11 @@ color: rgb(115, 210, 22);</string>
         </item>
         <item row="3" column="1">
          <widget class="QPushButton" name="flow_button">
+          <property name="font">
+           <font>
+            <pointsize>18</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>Flow</string>
           </property>
@@ -151,6 +171,11 @@ color: rgb(115, 210, 22);</string>
         </item>
         <item row="7" column="1">
          <widget class="QPushButton" name="pushButton_8">
+          <property name="font">
+           <font>
+            <pointsize>18</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>PushButton</string>
           </property>
@@ -183,7 +208,7 @@ color: rgb(115, 210, 22);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1045</width>
+     <width>1101</width>
      <height>22</height>
     </rect>
    </property>
