@@ -53,6 +53,11 @@ def get_info_by_keys(req_cache, up_key, switch_id="0"):
 
 
 def custom_model(data):
+    """
+    set a table model for Qtableview. In Info_present_window.
+    :param data: a dict data need to fill in table.
+    :return:
+    """
     model = QStandardItemModel(len(data), len(data[0]))
     model.setHorizontalHeaderLabels(data[0].keys())
 
@@ -61,6 +66,18 @@ def custom_model(data):
             index = model.index(int(i), int(j))
             model.setData(index, row[key])
     return model
+
+
+def check_to_line_edit(line):
+    """
+    If the line edit is empty, set 0 by default. In flow_control_window class.
+    :param line: the object of line edit
+    :return: the text of line edit.
+    """
+    if line.text() == "":
+        return 0
+    else:
+        return line.text()
 
 
 class GUI_main(QMainWindow, Ui_MainWindow):
@@ -127,18 +144,6 @@ class GUI_main(QMainWindow, Ui_MainWindow):
                               "Please tap in IP and Port first")
 
 
-def check_to_line_edit(line):
-    """
-    if the line edit is empty, set 0 by default.
-    :param line: the object of line edit
-    :return: the text of line edit.
-    """
-    if line.text() == "":
-        return 0
-    else:
-        return line.text()
-
-
 class flow_control_window(QMainWindow, Ui_flow_control):
 
     def __init__(self):
@@ -190,25 +195,40 @@ class flow_control_window(QMainWindow, Ui_flow_control):
             main_ui.cache.payload["operation"] = self.operation
             main_ui.cache.payload["table_id"] = self.table_id_flow.value()
 
-            main_ui.cache.payload["priority"] = check_to_line_edit(self.priority)
-            main_ui.cache.payload["idle_timeout"] = check_to_line_edit(self.idle_timeout)
-            main_ui.cache.payload["hard_timeout"] = check_to_line_edit(self.hard_timeout)
+            main_ui.cache.payload["priority"] = check_to_line_edit(
+                self.priority)
+            main_ui.cache.payload["idle_timeout"] = check_to_line_edit(
+                self.idle_timeout)
+            main_ui.cache.payload["hard_timeout"] = check_to_line_edit(
+                self.hard_timeout)
             main_ui.cache.payload["cookie"] = check_to_line_edit(self.cookie)
-            main_ui.cache.payload["cookie_mask"] = check_to_line_edit(self.cookie_mask)
-            main_ui.cache.payload["out_port"] = check_to_line_edit(self.output_port)
-            main_ui.cache.payload["out_group"] = check_to_line_edit(self.output_group)
-            main_ui.cache.payload["meter_id"] = check_to_line_edit(self.meter_id)
-            main_ui.cache.payload["metadata"] = check_to_line_edit(self.write_metadate)
-            main_ui.cache.payload["metadata_mask"] = check_to_line_edit(self.metadate_mask)
+            main_ui.cache.payload["cookie_mask"] = check_to_line_edit(
+                self.cookie_mask)
+            main_ui.cache.payload["out_port"] = check_to_line_edit(
+                self.output_port)
+            main_ui.cache.payload["out_group"] = check_to_line_edit(
+                self.output_group)
+            main_ui.cache.payload["meter_id"] = check_to_line_edit(
+                self.meter_id)
+            main_ui.cache.payload["metadata"] = check_to_line_edit(
+                self.write_metadate)
+            main_ui.cache.payload["metadata_mask"] = check_to_line_edit(
+                self.metadate_mask)
             main_ui.cache.payload["goto"] = check_to_line_edit(self.goto_table)
 
             main_ui.cache.payload["matchcheckbox"] = self.match_any.isChecked()
-            main_ui.cache.payload["clearactions"] = self.clear_actions.isChecked()
-            main_ui.cache.payload["SEND_FLOW_REM"] = self.send_flowremoved_msg.isChecked()
-            main_ui.cache.payload["CHECK_OVERLAP"] = self.check_overlapping.isChecked()
-            main_ui.cache.payload["RESET_COUNTS"] = self.reset_counts.isChecked()
-            main_ui.cache.payload["NO_PKT_COUNTS"] = self.do_not_count_packets.isChecked()
-            main_ui.cache.payload["NO_BYT_COUNTS"] = self.do_not_count_bytes.isChecked()
+            main_ui.cache.payload["clearactions"] = self.clear_actions.isChecked(
+            )
+            main_ui.cache.payload["SEND_FLOW_REM"] = self.send_flowremoved_msg.isChecked(
+            )
+            main_ui.cache.payload["CHECK_OVERLAP"] = self.check_overlapping.isChecked(
+            )
+            main_ui.cache.payload["RESET_COUNTS"] = self.reset_counts.isChecked(
+            )
+            main_ui.cache.payload["NO_PKT_COUNTS"] = self.do_not_count_packets.isChecked(
+            )
+            main_ui.cache.payload["NO_BYT_COUNTS"] = self.do_not_count_bytes.isChecked(
+            )
 
             main_ui.cache.payload["match"] = {}
             main_ui.cache.payload["apply"] = []
