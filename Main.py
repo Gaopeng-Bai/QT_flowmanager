@@ -211,8 +211,10 @@ class flow_control_window(QMainWindow, Ui_flow_control):
         self.action_type_apply.addItems(actions)
         self.action_type_write_action.addItems(actions)
         self.match_field.activated.connect(self.match_value_find)
-        self.action_type_apply.activated.connect(self.action_type_apply_value_find)
-        self.action_type_write_action.activated.connect(self.action_type_write_action_value_find)
+        self.action_type_apply.activated.connect(
+            self.action_type_apply_value_find)
+        self.action_type_write_action.activated.connect(
+            self.action_type_write_action_value_find)
 
     def action_type_write_action_value_find(self, item):
         self.value_write_action.setPlaceholderText(self.actions_value[item])
@@ -273,19 +275,23 @@ class flow_control_window(QMainWindow, Ui_flow_control):
             data["apply"] = []
 
             if self.match_field.currentText() != '':
-                data["match"] = {self.match_field.currentText(): self.value_match_field.text()}
+                data["match"] = {
+                    self.match_field.currentText(): self.value_match_field.text()}
             else:
                 data["match"] = {}
 
             if self.action_type_apply.currentText() != '':
-                data["apply"].append({self.action_type_apply.currentText():self.value_apply_action.text()})
+                data["apply"].append(
+                    {self.action_type_apply.currentText(): self.value_apply_action.text()})
 
             if self.action_type_write_action.currentText() != '':
-                data["write"] = {self.action_type_write_action.currentText(): self.value_write_action.text()}
+                data["write"] = {
+                    self.action_type_write_action.currentText(): self.value_write_action.text()}
             else:
                 data["write"] = {}
 
-            response = main_ui.cache.post_flow_control(up_key="control", data=data)
+            response = main_ui.cache.post_flow_control(
+                up_key="control", data=data)
             if response.status_code == 200:
                 QMessageBox.about(None, "Done!!",
                                   "Message sent successfully")
@@ -317,7 +323,8 @@ class flow_present_window(QMainWindow, Ui_flow):
         self.setupUi(self)
         # view
         self.flow_table_view.setSelectionBehavior(QAbstractItemView.SelectRows)
-        self.flow_table_view.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.flow_table_view.setSelectionMode(
+            QAbstractItemView.SingleSelection)
         self.flow_table_view.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
         self.flow_table_view.resizeColumnsToContents()
@@ -338,7 +345,8 @@ class flow_present_window(QMainWindow, Ui_flow):
             temp = self.flows[self.highlight_item].copy()
             temp["dpid"] = self.flow_switch_ids.currentText()[3:]
             data.append(temp)
-            response = main_ui.cache.post_flow_control(up_key="flow_delete", data=data)
+            response = main_ui.cache.post_flow_control(
+                up_key="flow_delete", data=data)
             if response.status_code == 200:
                 QMessageBox.about(None, "Done!!",
                                   "Message sent successfully")
@@ -362,7 +370,7 @@ class flow_present_window(QMainWindow, Ui_flow):
             if len(self.flows) != 0:
                 for key in self.flows[0].keys():
                     temp.append(key)
-                temp = temp[-1:]+temp[:10]
+                temp = temp[-1:] + temp[:10]
                 self.flow_table_view.setRowCount(len(self.flows))
                 self.flow_table_view.setColumnCount(11)
                 self.flow_table_view.setHorizontalHeaderLabels(temp)

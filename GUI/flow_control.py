@@ -15,7 +15,7 @@ class Ui_flow_control(object):
         flow_control.setObjectName("flow_control")
         flow_control.resize(782, 783)
         flow_control.setStyleSheet("background-color: rgb(85, 87, 83);\n"
-"color: rgb(115, 210, 22);")
+                                   "color: rgb(115, 210, 22);")
         self.groupBox = QtWidgets.QGroupBox(flow_control)
         self.groupBox.setGeometry(QtCore.QRect(10, 20, 211, 131))
         self.groupBox.setObjectName("groupBox")
@@ -236,39 +236,57 @@ class Ui_flow_control(object):
         self.label_4.setText(_translate("flow_control", "Value"))
         self.label_5.setText(_translate("flow_control", "Priority"))
         self.label_6.setText(_translate("flow_control", "Idle timeout"))
-        self.idle_timeout.setPlaceholderText(_translate("flow_control", "seconds"))
+        self.idle_timeout.setPlaceholderText(
+            _translate("flow_control", "seconds"))
         self.label_8.setText(_translate("flow_control", "Cookie"))
         self.cookie.setPlaceholderText(_translate("flow_control", "integer"))
         self.label_9.setText(_translate("flow_control", "Cookie Mask"))
-        self.cookie_mask.setPlaceholderText(_translate("flow_control", "integer"))
+        self.cookie_mask.setPlaceholderText(
+            _translate("flow_control", "integer"))
         self.label_7.setText(_translate("flow_control", "Hard timeout"))
-        self.hard_timeout.setPlaceholderText(_translate("flow_control", "seconds"))
+        self.hard_timeout.setPlaceholderText(
+            _translate("flow_control", "seconds"))
         self.label_10.setText(_translate("flow_control", "Output Port"))
-        self.output_port.setPlaceholderText(_translate("flow_control", "port number or -1 for any"))
+        self.output_port.setPlaceholderText(_translate(
+            "flow_control", "port number or -1 for any"))
         self.label_11.setText(_translate("flow_control", "Output Group"))
-        self.output_group.setPlaceholderText(_translate("flow_control", "groud id or -1 for any"))
-        self.priority.setPlaceholderText(_translate("flow_control", "entry priority"))
+        self.output_group.setPlaceholderText(
+            _translate("flow_control", "groud id or -1 for any"))
+        self.priority.setPlaceholderText(
+            _translate("flow_control", "entry priority"))
         self.groupBox_5.setTitle(_translate("flow_control", "Instuctions:"))
-        self.write_metadate.setPlaceholderText(_translate("flow_control", "string"))
+        self.write_metadate.setPlaceholderText(
+            _translate("flow_control", "string"))
         self.label_20.setText(_translate("flow_control", "Metadata Mask:"))
         self.groupBox_7.setTitle(_translate("flow_control", "Apply action:"))
         self.label_14.setText(_translate("flow_control", "Action Type"))
         self.label_15.setText(_translate("flow_control", "Value"))
-        self.metadate_mask.setPlaceholderText(_translate("flow_control", "string"))
+        self.metadate_mask.setPlaceholderText(
+            _translate("flow_control", "string"))
         self.label_21.setText(_translate("flow_control", "Goto Table:"))
-        self.goto_table.setPlaceholderText(_translate("flow_control", "table_id"))
+        self.goto_table.setPlaceholderText(
+            _translate("flow_control", "table_id"))
         self.clear_actions.setText(_translate("flow_control", "Clear Actions"))
         self.label_19.setText(_translate("flow_control", "Write Metadate:"))
         self.label_12.setText(_translate("flow_control", "Goto Meter"))
-        self.meter_id.setPlaceholderText(_translate("flow_control", "meter-id or -1 for any"))
+        self.meter_id.setPlaceholderText(_translate(
+            "flow_control", "meter-id or -1 for any"))
         self.groupBox_8.setTitle(_translate("flow_control", "Write Actions:"))
         self.label_16.setText(_translate("flow_control", "Action Type"))
         self.label_17.setText(_translate("flow_control", "Value"))
         self.groupBox_6.setTitle(_translate("flow_control", "Flags"))
-        self.send_flowremoved_msg.setText(_translate("flow_control", "Send flow-removed msg"))
-        self.check_overlapping.setText(_translate("flow_control", "Check overlapping"))
+        self.send_flowremoved_msg.setText(_translate(
+            "flow_control", "Send flow-removed msg"))
+        self.check_overlapping.setText(
+            _translate(
+                "flow_control",
+                "Check overlapping"))
         self.reset_counts.setText(_translate("flow_control", "Reset counts "))
-        self.do_not_count_packets.setText(_translate("flow_control", "Do not count packets"))
-        self.do_not_count_bytes.setText(_translate("flow_control", "Do not count bytes"))
+        self.do_not_count_packets.setText(
+            _translate("flow_control", "Do not count packets"))
+        self.do_not_count_bytes.setText(
+            _translate(
+                "flow_control",
+                "Do not count bytes"))
         self.submit.setText(_translate("flow_control", "Submit"))
         self.Clear.setText(_translate("flow_control", "Clear"))

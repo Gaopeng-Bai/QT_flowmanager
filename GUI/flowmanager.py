@@ -15,7 +15,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1120, 793)
         MainWindow.setStyleSheet("background-color: rgb(6, 22, 34);\n"
-"color: rgb(115, 210, 22);")
+                                 "color: rgb(115, 210, 22);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.formLayout = QtWidgets.QFormLayout(self.centralwidget)
@@ -48,7 +48,8 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.Connect_server, 2, 1, 1, 1)
         self.gridLayout_3.addLayout(self.gridLayout, 0, 0, 1, 1)
         self.left.addWidget(self.groupBox)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.left.addItem(spacerItem)
         self.gridLayout_7 = QtWidgets.QGridLayout()
         self.gridLayout_7.setObjectName("gridLayout_7")
@@ -58,9 +59,11 @@ class Ui_MainWindow(object):
         self.flow_control.setFont(font)
         self.flow_control.setObjectName("flow_control")
         self.gridLayout_7.addWidget(self.flow_control, 5, 1, 1, 1)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem1 = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_7.addItem(spacerItem1, 2, 1, 1, 1)
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem2 = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_7.addItem(spacerItem2, 1, 0, 1, 1)
         self.status_button = QtWidgets.QPushButton(self.centralwidget)
         font = QtGui.QFont()
@@ -68,7 +71,8 @@ class Ui_MainWindow(object):
         self.status_button.setFont(font)
         self.status_button.setObjectName("status_button")
         self.gridLayout_7.addWidget(self.status_button, 1, 1, 1, 1)
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem3 = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_7.addItem(spacerItem3, 1, 2, 1, 1)
         self.flow_button = QtWidgets.QPushButton(self.centralwidget)
         font = QtGui.QFont()
@@ -76,7 +80,8 @@ class Ui_MainWindow(object):
         self.flow_button.setFont(font)
         self.flow_button.setObjectName("flow_button")
         self.gridLayout_7.addWidget(self.flow_button, 3, 1, 1, 1)
-        spacerItem4 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem4 = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_7.addItem(spacerItem4, 4, 1, 1, 1)
         self.pushButton_8 = QtWidgets.QPushButton(self.centralwidget)
         font = QtGui.QFont()
@@ -84,13 +89,16 @@ class Ui_MainWindow(object):
         self.pushButton_8.setFont(font)
         self.pushButton_8.setObjectName("pushButton_8")
         self.gridLayout_7.addWidget(self.pushButton_8, 7, 1, 1, 1)
-        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem5 = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_7.addItem(spacerItem5, 6, 1, 1, 1)
         self.left.addLayout(self.gridLayout_7)
-        self.formLayout.setLayout(0, QtWidgets.QFormLayout.LabelRole, self.left)
+        self.formLayout.setLayout(
+            0, QtWidgets.QFormLayout.LabelRole, self.left)
         self.subwindows = QtWidgets.QVBoxLayout()
         self.subwindows.setObjectName("subwindows")
-        self.formLayout.setLayout(0, QtWidgets.QFormLayout.FieldRole, self.subwindows)
+        self.formLayout.setLayout(
+            0, QtWidgets.QFormLayout.FieldRole, self.subwindows)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1120, 22))

@@ -15,7 +15,7 @@ class Ui_flow(object):
         flow.setObjectName("flow")
         flow.resize(879, 682)
         flow.setStyleSheet("background-color: rgb(85, 87, 83);\n"
-"color: rgb(115, 210, 22);")
+                           "color: rgb(115, 210, 22);")
         self.flow_switch_ids = QtWidgets.QComboBox(flow)
         self.flow_switch_ids.setGeometry(QtCore.QRect(10, 10, 301, 31))
         self.flow_switch_ids.setObjectName("flow_switch_ids")

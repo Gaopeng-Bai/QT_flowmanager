@@ -100,8 +100,17 @@ class req_server:
             return 0
 
     def post_flow_control(self, up_key, data={}):
-        url = {"control": "http://" + self.ip + ":" + self.port + "/flowform",
-               "flow_delete": "http://" + self.ip + ":" + self.port + "/flowdel"}
+        url = {
+            "control": "http://" +
+            self.ip +
+            ":" +
+            self.port +
+            "/flowform",
+            "flow_delete": "http://" +
+            self.ip +
+            ":" +
+            self.port +
+            "/flowdel"}
 
         header = {
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) '
