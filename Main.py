@@ -316,6 +316,10 @@ class flow_present_window(QMainWindow, Ui_flow):
         super(flow_present_window, self).__init__()
         self.setupUi(self)
         # view
+        self.flow_table_view.setEditTriggers(QAbstractItemView.NoEditTriggers)
+
+        self.flow_table_view.setSelectionBehavior(QAbstractItemView.SelectRows)
+
         self.flow_switch_ids.activated.connect(self.show_flows)
 
     def show_flows(self):
@@ -339,6 +343,16 @@ class Info_present_window(QMainWindow, Ui_info_present):
         super(Info_present_window, self).__init__()
         self.setupUi(self)
         # view
+        self.port_desc.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.port_status.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.flow_summary.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.table_status.setEditTriggers(QAbstractItemView.NoEditTriggers)
+
+        self.port_desc.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.port_status.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.flow_summary.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.table_status.setSelectionBehavior(QAbstractItemView.SelectRows)
+
         self.switch_ids.itemClicked.connect(self.show_switch_info)
 
     def show_switch_info(self, item):
