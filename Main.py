@@ -23,6 +23,23 @@ from GUI.flow import Ui_flow
 from server_operation.server_info import req_server
 
 
+def read_json_(path):
+    """
+    read json file for match filed, action type.
+    :param path: json file path
+    :return: filed list and value list.
+    """
+    with open(path, 'r') as f:
+        data = json.load(f)
+        a = []
+        b = []
+        for key in data:
+            a.append(key)
+            b.append(data[key][1])
+
+        return a, b
+
+
 def get_info_by_keys(req_cache, up_key, switch_id="0"):
     """
     execute program to get information from ryu server
@@ -48,7 +65,7 @@ def get_info_by_keys(req_cache, up_key, switch_id="0"):
             data = json.loads(content)
             return data
         else:
-            QMessageBox.about(None, "request error"+str(r.status_code),
+            QMessageBox.about(None, "request error" + str(r.status_code),
                               "Please check this requests")
             return False
 
@@ -76,9 +93,9 @@ def check_to_line_edit(line):
     :return: the text of line edit.
     """
     if line.text() == "":
-        return 1
+        return int(0)
     else:
-        return line.text()
+        return int(line.text())
 
 
 class GUI_main(QMainWindow, Ui_MainWindow):
@@ -152,7 +169,8 @@ class GUI_main(QMainWindow, Ui_MainWindow):
                 for switch in switches:
                     self.Info_present_window.switch_ids.addItem(switch)
                     self.flows_viewer.flow_switch_ids.addItem("SW_" + switch)
-                    self.flow_control_window_present.switch_id_flow.addItem("SW_" + switch)
+                    self.flow_control_window_present.switch_id_flow.addItem(
+                        "SW_" + switch)
         else:
             QMessageBox.about(None, "No sever Info",
                               "Please tap in IP and Port first")
@@ -186,58 +204,88 @@ class flow_control_window(QMainWindow, Ui_flow_control):
         self.meter_id.setValidator(QIntValidator(-1, 100000, self))
 
         self.goto_table.setValidator(QIntValidator(0, 100000, self))
+        # operation
+        matches, self.match_value = read_json_(path="data/matches.json")
+        actions, self.actions_value = read_json_(path="data/actions.json")
+        self.match_field.addItems(matches)
+        self.action_type_apply.addItems(actions)
+        self.action_type_write_action.addItems(actions)
+        self.match_field.activated.connect(self.match_value_find)
+        self.action_type_apply.activated.connect(self.action_type_apply_value_find)
+        self.action_type_write_action.activated.connect(self.action_type_write_action_value_find)
+
+    def action_type_write_action_value_find(self, item):
+        self.value_write_action.setPlaceholderText(self.actions_value[item])
+
+    def action_type_apply_value_find(self, item):
+        self.value_apply_action.setPlaceholderText(self.actions_value[item])
+
+    def match_value_find(self, item):
+        self.value_match_field.setPlaceholderText(self.match_value[item])
 
     def submit_button(self):
         """
         submit request with current form.
         :return:
         """
+        data = {}
         id = self.switch_id_flow.currentText()
         if id != '':
-            main_ui.cache.payload["dpid"] = int(id[3:])
-            main_ui.cache.payload["operation"] = self.operation
-            main_ui.cache.payload["table_id"] = self.table_id_flow.value()
+            data["dpid"] = int(id[3:])
+            data["operation"] = self.operation
+            data["table_id"] = self.table_id_flow.value()
 
-            main_ui.cache.payload["priority"] = check_to_line_edit(
+            data["priority"] = check_to_line_edit(
                 self.priority)
-            main_ui.cache.payload["idle_timeout"] = check_to_line_edit(
+            data["idle_timeout"] = check_to_line_edit(
                 self.idle_timeout)
-            main_ui.cache.payload["hard_timeout"] = check_to_line_edit(
+            data["hard_timeout"] = check_to_line_edit(
                 self.hard_timeout)
-            main_ui.cache.payload["cookie"] = check_to_line_edit(self.cookie)
-            main_ui.cache.payload["cookie_mask"] = check_to_line_edit(
+            data["cookie"] = check_to_line_edit(self.cookie)
+            data["cookie_mask"] = check_to_line_edit(
                 self.cookie_mask)
-            main_ui.cache.payload["out_port"] = check_to_line_edit(
+            data["out_port"] = check_to_line_edit(
                 self.output_port)
-            main_ui.cache.payload["out_group"] = check_to_line_edit(
+            data["out_group"] = check_to_line_edit(
                 self.output_group)
-            main_ui.cache.payload["meter_id"] = check_to_line_edit(
+            data["meter_id"] = check_to_line_edit(
                 self.meter_id)
-            main_ui.cache.payload["metadata"] = check_to_line_edit(
+            data["metadata"] = check_to_line_edit(
                 self.write_metadate)
-            main_ui.cache.payload["metadata_mask"] = check_to_line_edit(
+            data["metadata_mask"] = check_to_line_edit(
                 self.metadate_mask)
-            main_ui.cache.payload["goto"] = check_to_line_edit(self.goto_table)
+            data["goto"] = check_to_line_edit(self.goto_table)
 
-            main_ui.cache.payload["matchcheckbox"] = self.match_any.isChecked()
-            main_ui.cache.payload["clearactions"] = self.clear_actions.isChecked(
+            data["matchcheckbox"] = self.match_any.isChecked()
+            data["clearactions"] = self.clear_actions.isChecked(
             )
-            main_ui.cache.payload["SEND_FLOW_REM"] = self.send_flowremoved_msg.isChecked(
+            data["SEND_FLOW_REM"] = self.send_flowremoved_msg.isChecked(
             )
-            main_ui.cache.payload["CHECK_OVERLAP"] = self.check_overlapping.isChecked(
+            data["CHECK_OVERLAP"] = self.check_overlapping.isChecked(
             )
-            main_ui.cache.payload["RESET_COUNTS"] = self.reset_counts.isChecked(
+            data["RESET_COUNTS"] = self.reset_counts.isChecked(
             )
-            main_ui.cache.payload["NO_PKT_COUNTS"] = self.do_not_count_packets.isChecked(
+            data["NO_PKT_COUNTS"] = self.do_not_count_packets.isChecked(
             )
-            main_ui.cache.payload["NO_BYT_COUNTS"] = self.do_not_count_bytes.isChecked(
+            data["NO_BYT_COUNTS"] = self.do_not_count_bytes.isChecked(
             )
 
-            main_ui.cache.payload["match"] = {}
-            main_ui.cache.payload["apply"] = []
-            main_ui.cache.payload["write"] = {}
+            data["apply"] = []
 
-            response = main_ui.cache.post_flow_control()
+            if self.match_field.currentText() != '':
+                data["match"] = {self.match_field.currentText(): self.value_match_field.text()}
+            else:
+                data["match"] = {}
+
+            if self.action_type_apply.currentText() != '':
+                data["apply"].append({self.action_type_apply.currentText():self.value_apply_action.text()})
+
+            if self.action_type_write_action.currentText() != '':
+                data["write"] = {self.action_type_write_action.currentText(): self.value_write_action.text()}
+            else:
+                data["write"] = {}
+
+            response = main_ui.cache.post_flow_control(data)
             if response.status_code == 200:
                 QMessageBox.about(None, "Done!!",
                                   "Message sent successfully")

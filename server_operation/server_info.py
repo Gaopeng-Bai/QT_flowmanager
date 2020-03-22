@@ -45,7 +45,6 @@ class req_server:
             "apply": [],
             "write": {}
         }
-        print(self.payload)
 
     def get_info(self, key, ids):
         url = {
@@ -100,21 +99,21 @@ class req_server:
         else:
             return 0
 
-    def post_flow_control(self):
+    def post_flow_control(self, data={}):
         url = "http://" + self.ip + ":" + self.port + "/flowform"
         header = {
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) '
                           'Chrome/80.0.3987.132 Safari/537.36 ',
             'Connection': 'keep-alive',
             'Accept-Encoding': 'gzip, deflate, br',
-            'Content-Type': 'application/x-www-form-urlencoded;charset = UTF-8'}
-
-        print(self.payload)
+            'Content-Type': 'application/x-www-form-urlencoded;charset = UTF-8',
+            'Content-Length': '380',
+            'X-Requested-With': 'XMLHttpRequest',
+            'Sec-Fetch-Site': 'same-origin'}
 
         try:
             r = requests.post(
-                url, data=demjson.encode(
-                    self.payload), headers=header)
+                url, data=demjson.encode(data), headers=header)
         except ConnectionError as e:  # This is the correct syntax
             print(e)
             r = "no response"
