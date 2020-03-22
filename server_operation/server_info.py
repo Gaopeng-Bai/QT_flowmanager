@@ -99,8 +99,10 @@ class req_server:
         else:
             return 0
 
-    def post_flow_control(self, data={}):
-        url = "http://" + self.ip + ":" + self.port + "/flowform"
+    def post_flow_control(self, up_key, data={}):
+        url = {"control": "http://" + self.ip + ":" + self.port + "/flowform",
+               "flow_delete": "http://" + self.ip + ":" + self.port + "/flowdel"}
+
         header = {
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) '
                           'Chrome/80.0.3987.132 Safari/537.36 ',
@@ -113,7 +115,7 @@ class req_server:
 
         try:
             r = requests.post(
-                url, data=demjson.encode(data), headers=header)
+                url[up_key], data=demjson.encode(data), headers=header)
         except ConnectionError as e:  # This is the correct syntax
             print(e)
             r = "no response"

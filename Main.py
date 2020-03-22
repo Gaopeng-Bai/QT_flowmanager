@@ -285,7 +285,7 @@ class flow_control_window(QMainWindow, Ui_flow_control):
             else:
                 data["write"] = {}
 
-            response = main_ui.cache.post_flow_control(data)
+            response = main_ui.cache.post_flow_control(up_key="control", data=data)
             if response.status_code == 200:
                 QMessageBox.about(None, "Done!!",
                                   "Message sent successfully")
@@ -316,19 +316,64 @@ class flow_present_window(QMainWindow, Ui_flow):
         super(flow_present_window, self).__init__()
         self.setupUi(self)
         # view
+        self.flow_table_view.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.flow_table_view.setSelectionMode(QAbstractItemView.SingleSelection)
         self.flow_table_view.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
-        self.flow_table_view.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.flow_table_view.resizeColumnsToContents()
+        self.flow_table_view.resizeRowsToContents()
+        self.flow_table_view.horizontalScrollBar()
+        self.flow_table_view.verticalHeader().setVisible(False)
+        self.flow_table_view.itemClicked.connect(self.current_item)
 
         self.flow_switch_ids.activated.connect(self.show_flows)
+        self.delete_flow.clicked.connect(self.delete_flow_function)
+        #
+        self.highlight_item = int
+        self.flows = {}
+
+    def delete_flow_function(self):
+        if self.highlight_item != "":
+            data = []
+            temp = self.flows[self.highlight_item].copy()
+            temp["dpid"] = self.flow_switch_ids.currentText()[3:]
+            data.append(temp)
+            response = main_ui.cache.post_flow_control(up_key="flow_delete", data=data)
+            if response.status_code == 200:
+                QMessageBox.about(None, "Done!!",
+                                  "Message sent successfully")
+                self.show_flows()
+            else:
+                QMessageBox.about(None, "Warning",
+                                  "Message sent failed")
+        else:
+            QMessageBox.about(None, "No item selected",
+                              "Please select row item first")
+
+    def current_item(self, item):
+        self.highlight_item = item.row()
 
     def show_flows(self):
         id = self.flow_switch_ids.currentText()[3:]
         if main_ui.cache is not None:
-            flows = get_info_by_keys(
-                main_ui.cache, up_key="flows", switch_id=id)
-            if len(flows[str(id)]) != 0:
-                self.flow_table_view.setModel(custom_model(flows[str(id)]))
+            self.flows = get_info_by_keys(
+                main_ui.cache, up_key="flows", switch_id=id)[str(id)]
+            temp = []
+            if len(self.flows) != 0:
+                for key in self.flows[0].keys():
+                    temp.append(key)
+                temp = temp[-1:]+temp[:10]
+                self.flow_table_view.setRowCount(len(self.flows))
+                self.flow_table_view.setColumnCount(11)
+                self.flow_table_view.setHorizontalHeaderLabels(temp)
+
+                for i, data in enumerate(self.flows):
+                    for j, value in enumerate(data):
+                        if j <= 10:
+                            newItem = QTableWidgetItem(str(data[temp[j]]))
+                            self.flow_table_view.setItem(i, j, newItem)
+
+                # self.flow_table_view.setModel(custom_model(flows[str(id)]))
         else:
             QMessageBox.about(None, "No sever Info",
                               "Please connect available server first")
@@ -349,9 +394,13 @@ class Info_present_window(QMainWindow, Ui_info_present):
         self.table_status.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
         self.port_desc.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.port_desc.verticalHeader().setVisible(False)
         self.port_status.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.port_status.verticalHeader().setVisible(False)
         self.flow_summary.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.flow_summary.verticalHeader().setVisible(False)
         self.table_status.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.table_status.verticalHeader().setVisible(False)
 
         self.switch_ids.itemClicked.connect(self.show_switch_info)
 
