@@ -15,7 +15,7 @@ class Ui_flow_control(object):
         flow_control.setObjectName("flow_control")
         flow_control.resize(782, 783)
         flow_control.setStyleSheet("background-color: rgb(85, 87, 83);\n"
-                                   "color: rgb(115, 210, 22);")
+                                   "color: rgb(243, 243, 243);")
         self.groupBox = QtWidgets.QGroupBox(flow_control)
         self.groupBox.setGeometry(QtCore.QRect(10, 20, 211, 131))
         self.groupBox.setObjectName("groupBox")

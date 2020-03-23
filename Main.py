@@ -336,11 +336,11 @@ class flow_present_window(QMainWindow, Ui_flow):
         self.flow_switch_ids.activated.connect(self.show_flows)
         self.delete_flow.clicked.connect(self.delete_flow_function)
         #
-        self.highlight_item = int
+        self.highlight_item = -1
         self.flows = {}
 
     def delete_flow_function(self):
-        if self.highlight_item != "":
+        if self.highlight_item != -1:
             data = []
             temp = self.flows[self.highlight_item].copy()
             temp["dpid"] = self.flow_switch_ids.currentText()[3:]
@@ -351,6 +351,7 @@ class flow_present_window(QMainWindow, Ui_flow):
                 QMessageBox.about(None, "Done!!",
                                   "Message sent successfully")
                 self.show_flows()
+                self.highlight_item = -1
             else:
                 QMessageBox.about(None, "Warning",
                                   "Message sent failed")
@@ -380,6 +381,8 @@ class flow_present_window(QMainWindow, Ui_flow):
                         if j <= 10:
                             newItem = QTableWidgetItem(str(data[temp[j]]))
                             self.flow_table_view.setItem(i, j, newItem)
+            else:
+                self.flow_table_view.clearContents()
 
                 # self.flow_table_view.setModel(custom_model(flows[str(id)]))
         else:

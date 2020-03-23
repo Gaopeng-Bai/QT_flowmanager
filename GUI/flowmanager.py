@@ -15,7 +15,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1120, 793)
         MainWindow.setStyleSheet("background-color: rgb(6, 22, 34);\n"
-                                 "color: rgb(115, 210, 22);")
+                                 "color: rgb(243, 243, 243);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.formLayout = QtWidgets.QFormLayout(self.centralwidget)

@@ -15,7 +15,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(6, 22, 34);
-color: rgb(115, 210, 22);</string>
+color: rgb(243, 243, 243);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QFormLayout" name="formLayout">

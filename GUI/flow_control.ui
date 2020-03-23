@@ -15,7 +15,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(85, 87, 83);
-color: rgb(115, 210, 22);</string>
+color: rgb(243, 243, 243);</string>
   </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
