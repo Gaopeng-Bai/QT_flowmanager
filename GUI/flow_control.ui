@@ -17,460 +17,486 @@
    <string notr="true">background-color: rgb(85, 87, 83);
 color: rgb(243, 243, 243);</string>
   </property>
-  <widget class="QGroupBox" name="groupBox">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>20</y>
-     <width>211</width>
-     <height>131</height>
+     <x>9</x>
+     <y>9</y>
+     <width>321</width>
+     <height>725</height>
     </rect>
-   </property>
-   <property name="title">
-    <string>Target:</string>
-   </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="2" column="0">
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>Table ID</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QSpinBox" name="table_id_flow"/>
-    </item>
-    <item row="1" column="1">
-     <widget class="QComboBox" name="switch_id_flow"/>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>Switch ID</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QGroupBox" name="groupBox_2">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>180</y>
-     <width>211</width>
-     <height>161</height>
-    </rect>
-   </property>
-   <property name="title">
-    <string>Flow Operation:</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QRadioButton" name="add">
-      <property name="text">
-       <string>add</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QRadioButton" name="modify">
-      <property name="text">
-       <string>modify</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QRadioButton" name="modify_strict">
-      <property name="text">
-       <string>Modify Strict</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QRadioButton" name="delete_flow">
-      <property name="text">
-       <string>Delete </string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QRadioButton" name="delete_strict">
-      <property name="text">
-       <string>Delete Strict</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QGroupBox" name="groupBox_3">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>370</y>
-     <width>314</width>
-     <height>121</height>
-    </rect>
-   </property>
-   <property name="title">
-    <string>Match Fields:</string>
-   </property>
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="0">
-     <widget class="QCheckBox" name="match_any">
-      <property name="text">
-       <string>Match Any</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="label_3">
-      <property name="text">
-       <string>Match field</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLabel" name="label_4">
-      <property name="text">
-       <string>Value</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QLineEdit" name="value_match_field"/>
-    </item>
-    <item row="2" column="0">
-     <widget class="QComboBox" name="match_field"/>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QGroupBox" name="groupBox_4">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>490</y>
-     <width>311</width>
-     <height>255</height>
-    </rect>
-   </property>
-   <property name="title">
-    <string/>
-   </property>
-   <layout class="QGridLayout" name="gridLayout_3">
-    <item row="0" column="0">
-     <widget class="QLabel" name="label_5">
-      <property name="text">
-       <string>Priority</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="label_6">
-      <property name="text">
-       <string>Idle timeout</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="idle_timeout">
-      <property name="inputMask">
-       <string notr="true"/>
-      </property>
-      <property name="placeholderText">
-       <string>seconds</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="label_8">
-      <property name="text">
-       <string>Cookie</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QLineEdit" name="cookie">
-      <property name="placeholderText">
-       <string>integer</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="label_9">
-      <property name="text">
-       <string>Cookie Mask</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="1">
-     <widget class="QLineEdit" name="cookie_mask">
-      <property name="placeholderText">
-       <string>integer</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="label_7">
-      <property name="text">
-       <string>Hard timeout</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QLineEdit" name="hard_timeout">
-      <property name="placeholderText">
-       <string>seconds</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0">
-     <widget class="QLabel" name="label_10">
-      <property name="text">
-       <string>Output Port</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="1">
-     <widget class="QLineEdit" name="output_port">
-      <property name="placeholderText">
-       <string>port number or -1 for any</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="0">
-     <widget class="QLabel" name="label_11">
-      <property name="text">
-       <string>Output Group</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="1">
-     <widget class="QLineEdit" name="output_group">
-      <property name="placeholderText">
-       <string>groud id or -1 for any</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="priority">
-      <property name="placeholderText">
-       <string>entry priority</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QGroupBox" name="groupBox_5">
-   <property name="geometry">
-    <rect>
-     <x>380</x>
-     <y>20</y>
-     <width>314</width>
-     <height>397</height>
-    </rect>
-   </property>
-   <property name="title">
-    <string>Instuctions:</string>
-   </property>
-   <layout class="QGridLayout" name="gridLayout_4">
-    <item row="7" column="1" colspan="2">
-     <widget class="QLineEdit" name="write_metadate">
-      <property name="placeholderText">
-       <string>string</string>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="0">
-     <widget class="QLabel" name="label_20">
-      <property name="text">
-       <string>Metadata Mask:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0" rowspan="3" colspan="3">
-     <widget class="QGroupBox" name="groupBox_7">
+     <widget class="QGroupBox" name="groupBox">
       <property name="title">
-       <string>Apply action:</string>
+       <string>Target:</string>
       </property>
-      <layout class="QGridLayout" name="gridLayout_5">
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_14">
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Action Type</string>
+          <string>Table ID</string>
          </property>
         </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QSpinBox" name="table_id_flow"/>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="value_apply_action"/>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLabel" name="label_15">
-         <property name="text">
-          <string>Value</string>
-         </property>
-        </widget>
+        <widget class="QComboBox" name="switch_id_flow"/>
        </item>
        <item row="1" column="0">
-        <widget class="QComboBox" name="action_type_apply"/>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Switch ID</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
     </item>
-    <item row="8" column="1" colspan="2">
-     <widget class="QLineEdit" name="metadate_mask">
-      <property name="placeholderText">
-       <string>string</string>
-      </property>
-     </widget>
-    </item>
-    <item row="9" column="0">
-     <widget class="QLabel" name="label_21">
-      <property name="text">
-       <string>Goto Table:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="9" column="1" colspan="2">
-     <widget class="QLineEdit" name="goto_table">
-      <property name="placeholderText">
-       <string>table_id</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0">
-     <widget class="QCheckBox" name="clear_actions">
-      <property name="text">
-       <string>Clear Actions</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="0">
-     <widget class="QLabel" name="label_19">
-      <property name="text">
-       <string>Write Metadate:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="label_12">
-      <property name="text">
-       <string>Goto Meter</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1" colspan="2">
-     <widget class="QLineEdit" name="meter_id">
-      <property name="placeholderText">
-       <string>meter-id or -1 for any</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="0" colspan="3">
-     <widget class="QGroupBox" name="groupBox_8">
+    <item>
+     <widget class="QGroupBox" name="groupBox_2">
       <property name="title">
-       <string>Write Actions:</string>
+       <string>Flow Operation:</string>
       </property>
-      <layout class="QGridLayout" name="gridLayout_6">
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_16">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QRadioButton" name="add">
          <property name="text">
-          <string>Action Type</string>
+          <string>add</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="value_write_action"/>
+       <item>
+        <widget class="QRadioButton" name="modify">
+         <property name="text">
+          <string>modify</string>
+         </property>
+        </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QLabel" name="label_17">
+       <item>
+        <widget class="QRadioButton" name="modify_strict">
+         <property name="text">
+          <string>Modify Strict</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="delete_flow">
+         <property name="text">
+          <string>Delete </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="delete_strict">
+         <property name="text">
+          <string>Delete Strict</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="title">
+       <string>Match Fields:</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="1" column="0">
+        <widget class="QCheckBox" name="match_any">
+         <property name="text">
+          <string>Match Any</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Match field</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLabel" name="label_4">
          <property name="text">
           <string>Value</string>
          </property>
         </widget>
        </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="value_match_field"/>
+       </item>
+       <item row="3" column="0">
+        <widget class="QComboBox" name="match_field"/>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="groupBox_4">
+      <property name="title">
+       <string/>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>Cookie</string>
+         </property>
+        </widget>
+       </item>
        <item row="1" column="0">
-        <widget class="QComboBox" name="action_type_write_action"/>
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>Priority</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="priority">
+         <property name="placeholderText">
+          <string>entry priority</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="label_11">
+         <property name="text">
+          <string>Output Group</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QLineEdit" name="output_group">
+         <property name="placeholderText">
+          <string>groud id or -1 for any</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QLineEdit" name="output_port">
+         <property name="placeholderText">
+          <string>port number or -1 for any</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="hard_timeout">
+         <property name="placeholderText">
+          <string>seconds</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>Hard timeout</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="idle_timeout">
+         <property name="inputMask">
+          <string notr="true"/>
+         </property>
+         <property name="placeholderText">
+          <string>seconds</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QLineEdit" name="cookie_mask">
+         <property name="placeholderText">
+          <string>integer</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>Cookie Mask</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="label_10">
+         <property name="text">
+          <string>Output Port</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="cookie">
+         <property name="placeholderText">
+          <string>integer</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>Idle timeout</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QGroupBox" name="groupBox_6">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>440</y>
+     <x>360</x>
+     <y>10</y>
      <width>391</width>
-     <height>131</height>
+     <height>702</height>
     </rect>
    </property>
-   <property name="title">
-    <string>Flags</string>
-   </property>
-   <layout class="QGridLayout" name="gridLayout_7">
-    <item row="0" column="0">
-     <widget class="QCheckBox" name="send_flowremoved_msg">
+   <layout class="QVBoxLayout" name="verticalLayout_3">
+    <item>
+     <widget class="QGroupBox" name="groupBox_5">
+      <property name="title">
+       <string>Instuctions:</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="7" column="1" colspan="2">
+        <widget class="QLineEdit" name="write_metadate">
+         <property name="placeholderText">
+          <string>string</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="label_20">
+         <property name="text">
+          <string>Metadata Mask:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" rowspan="3" colspan="3">
+        <widget class="QGroupBox" name="groupBox_7">
+         <property name="title">
+          <string>Apply action:</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_14">
+            <property name="text">
+             <string>Action Type</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="value_apply_action"/>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_15">
+            <property name="text">
+             <string>Value</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QComboBox" name="action_type_apply"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="8" column="1" colspan="2">
+        <widget class="QLineEdit" name="metadate_mask">
+         <property name="placeholderText">
+          <string>string</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="0">
+        <widget class="QLabel" name="label_21">
+         <property name="text">
+          <string>Goto Table:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="1" colspan="2">
+        <widget class="QLineEdit" name="goto_table">
+         <property name="placeholderText">
+          <string>table_id</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QCheckBox" name="clear_actions">
+         <property name="text">
+          <string>Clear Actions</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="label_19">
+         <property name="text">
+          <string>Write Metadate:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_12">
+         <property name="text">
+          <string>Goto Meter</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" colspan="2">
+        <widget class="QLineEdit" name="meter_id">
+         <property name="placeholderText">
+          <string>meter-id or -1 for any</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0" colspan="3">
+        <widget class="QGroupBox" name="groupBox_8">
+         <property name="title">
+          <string>Write Actions:</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_6">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_16">
+            <property name="text">
+             <string>Action Type</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="value_write_action"/>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_17">
+            <property name="text">
+             <string>Value</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QComboBox" name="action_type_write_action"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="groupBox_6">
+      <property name="title">
+       <string>Flags</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_7">
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="send_flowremoved_msg">
+         <property name="text">
+          <string>Send flow-removed msg</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" rowspan="2">
+        <widget class="QCheckBox" name="check_overlapping">
+         <property name="text">
+          <string>Check overlapping</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" rowspan="2">
+        <widget class="QCheckBox" name="reset_counts">
+         <property name="text">
+          <string>Reset counts </string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QCheckBox" name="do_not_count_packets">
+         <property name="text">
+          <string>Do not count packets</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QCheckBox" name="do_not_count_bytes">
+         <property name="text">
+          <string>Do not count bytes</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QPushButton" name="submit">
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
       <property name="text">
-       <string>Send flow-removed msg</string>
+       <string>Submit</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="1" rowspan="2">
-     <widget class="QCheckBox" name="check_overlapping">
-      <property name="text">
-       <string>Check overlapping</string>
+    <item>
+     <spacer name="verticalSpacer_4">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
       </property>
-     </widget>
-    </item>
-    <item row="1" column="0" rowspan="2">
-     <widget class="QCheckBox" name="reset_counts">
-      <property name="text">
-       <string>Reset counts </string>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
       </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QCheckBox" name="do_not_count_packets">
-      <property name="text">
-       <string>Do not count packets</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QCheckBox" name="do_not_count_bytes">
-      <property name="text">
-       <string>Do not count bytes</string>
-      </property>
-     </widget>
+     </spacer>
     </item>
    </layout>
-  </widget>
-  <widget class="QPushButton" name="submit">
-   <property name="geometry">
-    <rect>
-     <x>380</x>
-     <y>670</y>
-     <width>101</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Submit</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="Clear">
-   <property name="geometry">
-    <rect>
-     <x>580</x>
-     <y>670</y>
-     <width>101</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Clear</string>
-   </property>
   </widget>
  </widget>
  <resources/>
