@@ -1,9 +1,9 @@
 #!/home/{username}/anaconda3 python
 # encoding: utf-8
 """
-@author: gaopeng
+@author: li weishi
 @license: (C) Copyright 2013-2017, Node Supply Chain Manager Corporation Limited.
-@contact: gaopengbai0121@gmail.com
+@contact: 2018787853@qq.com
 @software: garner
 @file: Main.py
 @time: 3/18/20 12:59 PM
