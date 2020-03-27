@@ -103,33 +103,24 @@ class GUI_main(QMainWindow, Ui_MainWindow):
         super(GUI_main, self).__init__()
         self.setupUi(main_window)
         self.ui_init()
+        self.sub = QStackedLayout(self.subwindows)
 
         self.cache = None
         self.Info_present_window = Info_present_window()
         self.flows_viewer = flow_present_window()
         self.flow_control_window_present = flow_control_window()
-        self.subwindows.addWidget(self.flow_control_window_present)
-        self.subwindows.addWidget(self.Info_present_window)
-        self.subwindows.addWidget(self.flows_viewer)
+        self.sub.addWidget(self.Info_present_window)
+        self.sub.addWidget(self.flows_viewer)
+        self.sub.addWidget(self.flow_control_window_present)
 
-        # default window
-        self.home_window()
-
-    def home_window(self):
-        self.flow_control_window_present.close()
-        self.flows_viewer.close()
-        self.Info_present_window.show()
-
-    def flow_window(self):
-        self.Info_present_window.close()
-        self.flow_control_window_present.close()
-        self.flows_viewer.show_flows()
-        self.flows_viewer.show()
-
-    def flow_control_window(self):
-        self.flows_viewer.close()
-        self.Info_present_window.close()
-        self.flow_control_window_present.show()
+    def show_panel(self):
+        dic = {
+            "status_button": 0,
+            "flow_button": 1,
+            "flow_control": 2,
+        }
+        index = dic[self.sender().objectName()]
+        self.sub.setCurrentIndex(index)
 
     def ui_init(self):
         """
@@ -143,11 +134,11 @@ class GUI_main(QMainWindow, Ui_MainWindow):
         self.port.setText('8080')
         self.Connect_server.clicked.connect(self.connect_to_show)
         # status button connect to home window
-        self.status_button.clicked.connect(self.home_window)
+        self.status_button.clicked.connect(self.show_panel)
         # flow button connect to flow viewer
-        self.flow_button.clicked.connect(self.flow_window)
+        self.flow_button.clicked.connect(self.show_panel)
         # flow control button
-        self.flow_control.clicked.connect(self.flow_control_window)
+        self.flow_control.clicked.connect(self.show_panel)
 
     def connect_to_show(self):
         """

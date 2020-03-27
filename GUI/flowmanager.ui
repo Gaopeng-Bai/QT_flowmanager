@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1120</width>
-    <height>793</height>
+    <width>1097</width>
+    <height>875</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -199,7 +199,14 @@ color: rgb(243, 243, 243);</string>
      </layout>
     </item>
     <item row="0" column="1">
-     <layout class="QVBoxLayout" name="subwindows"/>
+     <widget class="QFrame" name="subwindows">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -208,7 +215,7 @@ color: rgb(243, 243, 243);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1120</width>
+     <width>1097</width>
      <height>22</height>
     </rect>
    </property>
