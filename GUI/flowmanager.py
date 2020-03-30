@@ -13,9 +13,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1201, 847)
+        MainWindow.resize(1201, 885)
         MainWindow.setStyleSheet("background-color: rgb(6, 22, 34);\n"
-"color: rgb(194, 255, 189);")
+                                 "color: rgb(194, 255, 189);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.formLayout = QtWidgets.QFormLayout(self.centralwidget)
@@ -68,15 +68,20 @@ class Ui_MainWindow(object):
         self.status_button.setFont(font)
         self.status_button.setObjectName("status_button")
         self.gridLayout_7.addWidget(self.status_button, 1, 1, 1, 1)
-        spacerItem = QtWidgets.QSpacerItem(20, 60, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem = QtWidgets.QSpacerItem(
+            20, 60, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_7.addItem(spacerItem, 4, 1, 1, 1)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_7.addItem(spacerItem1, 1, 0, 1, 1)
-        spacerItem2 = QtWidgets.QSpacerItem(20, 60, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem2 = QtWidgets.QSpacerItem(
+            20, 60, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_7.addItem(spacerItem2, 6, 1, 1, 1)
-        spacerItem3 = QtWidgets.QSpacerItem(20, 60, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem3 = QtWidgets.QSpacerItem(
+            20, 60, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_7.addItem(spacerItem3, 2, 1, 1, 1)
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem4 = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_7.addItem(spacerItem4, 1, 2, 1, 1)
         self.flow_button = QtWidgets.QPushButton(self.centralwidget)
         font = QtGui.QFont()
@@ -84,17 +89,21 @@ class Ui_MainWindow(object):
         self.flow_button.setFont(font)
         self.flow_button.setObjectName("flow_button")
         self.gridLayout_7.addWidget(self.flow_button, 3, 1, 1, 1)
-        spacerItem5 = QtWidgets.QSpacerItem(20, 150, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem5 = QtWidgets.QSpacerItem(
+            20, 180, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_7.addItem(spacerItem5, 0, 1, 1, 1)
-        spacerItem6 = QtWidgets.QSpacerItem(20, 60, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem6 = QtWidgets.QSpacerItem(
+            20, 60, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_7.addItem(spacerItem6, 8, 1, 1, 1)
         self.left.addLayout(self.gridLayout_7)
-        self.formLayout.setLayout(0, QtWidgets.QFormLayout.LabelRole, self.left)
+        self.formLayout.setLayout(
+            0, QtWidgets.QFormLayout.LabelRole, self.left)
         self.subwindows = QtWidgets.QFrame(self.centralwidget)
         self.subwindows.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.subwindows.setFrameShadow(QtWidgets.QFrame.Raised)
         self.subwindows.setObjectName("subwindows")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.subwindows)
+        self.formLayout.setWidget(
+            0, QtWidgets.QFormLayout.FieldRole, self.subwindows)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1201, 26))

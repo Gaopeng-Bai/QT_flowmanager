@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1201</width>
-    <height>847</height>
+    <height>885</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -189,7 +189,7 @@ color: rgb(194, 255, 189);</string>
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>150</height>
+            <height>180</height>
            </size>
           </property>
          </spacer>
