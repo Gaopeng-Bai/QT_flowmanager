@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'flow_control.ui'
 #
-# Created by: PyQt5 UI code generator 5.14.1
+# Created by: PyQt5 UI code generator 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -13,9 +13,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_flow_control(object):
     def setupUi(self, flow_control):
         flow_control.setObjectName("flow_control")
-        flow_control.resize(891, 756)
+        flow_control.resize(888, 753)
         flow_control.setStyleSheet("background-color: rgb(85, 87, 83);\n"
-"color: rgb(243, 243, 243);")
+"color: rgb(194, 255, 189);")
         self.groupBox = QtWidgets.QGroupBox(flow_control)
         self.groupBox.setGeometry(QtCore.QRect(10, 30, 431, 101))
         self.groupBox.setObjectName("groupBox")

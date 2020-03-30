@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>891</width>
-    <height>756</height>
+    <width>888</width>
+    <height>753</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(85, 87, 83);
-color: rgb(243, 243, 243);</string>
+color: rgb(194, 255, 189);</string>
   </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">

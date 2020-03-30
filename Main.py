@@ -317,6 +317,8 @@ class flow_present_window(QMainWindow, Ui_flow):
         self.flow_table_view.setSelectionMode(
             QAbstractItemView.SingleSelection)
         self.flow_table_view.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.flow_table_view.setStyleSheet("QHeaderView::section{Background-color:rgb(0,1,1)}")
+
 
         self.flow_table_view.resizeColumnsToContents()
         self.flow_table_view.resizeRowsToContents()
@@ -397,12 +399,20 @@ class Info_present_window(QMainWindow, Ui_info_present):
 
         self.port_desc.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.port_desc.verticalHeader().setVisible(False)
+        self.port_desc.setStyleSheet("QHeaderView::section{Background-color:rgb(0,1,1)}")
+
         self.port_status.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.port_status.verticalHeader().setVisible(False)
+        self.port_status.setStyleSheet("QHeaderView::section{Background-color:rgb(0,1,1)}")
+
         self.flow_summary.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.flow_summary.verticalHeader().setVisible(False)
+        self.flow_summary.setStyleSheet("QHeaderView::section{Background-color:rgb(0,1,1)}")
+
         self.table_status.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.table_status.verticalHeader().setVisible(False)
+        self.table_status.setStyleSheet("QHeaderView::section{Background-color:rgb(0,1,1)}")
+
 
         self.switch_ids.itemClicked.connect(self.show_switch_info)
 

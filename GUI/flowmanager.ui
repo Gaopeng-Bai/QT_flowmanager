@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1169</width>
-    <height>816</height>
+    <width>1201</width>
+    <height>847</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(6, 22, 34);
-color: rgb(243, 243, 243);</string>
+color: rgb(194, 255, 189);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QFormLayout" name="formLayout">
@@ -67,19 +67,6 @@ color: rgb(243, 243, 243);</string>
        </widget>
       </item>
       <item>
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
        <layout class="QGridLayout" name="gridLayout_7">
         <item row="5" column="1">
          <widget class="QPushButton" name="flow_control">
@@ -93,15 +80,39 @@ color: rgb(243, 243, 243);</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
-         <spacer name="verticalSpacer_11">
+        <item row="7" column="1">
+         <widget class="QPushButton" name="pushButton_8">
+          <property name="font">
+           <font>
+            <pointsize>18</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>PushButton</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="status_button">
+          <property name="font">
+           <font>
+            <pointsize>18</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Status</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <spacer name="verticalSpacer_12">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>40</height>
+            <height>60</height>
            </size>
           </property>
          </spacer>
@@ -119,17 +130,31 @@ color: rgb(243, 243, 243);</string>
           </property>
          </spacer>
         </item>
-        <item row="1" column="1">
-         <widget class="QPushButton" name="status_button">
-          <property name="font">
-           <font>
-            <pointsize>18</pointsize>
-           </font>
+        <item row="6" column="1">
+         <spacer name="verticalSpacer_13">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
           </property>
-          <property name="text">
-           <string>Status</string>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>60</height>
+           </size>
           </property>
-         </widget>
+         </spacer>
+        </item>
+        <item row="2" column="1">
+         <spacer name="verticalSpacer_11">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>60</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item row="1" column="2">
          <spacer name="horizontalSpacer_8">
@@ -156,40 +181,28 @@ color: rgb(243, 243, 243);</string>
           </property>
          </widget>
         </item>
-        <item row="4" column="1">
-         <spacer name="verticalSpacer_12">
+        <item row="0" column="1">
+         <spacer name="verticalSpacer">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>40</height>
+            <height>150</height>
            </size>
           </property>
          </spacer>
         </item>
-        <item row="7" column="1">
-         <widget class="QPushButton" name="pushButton_8">
-          <property name="font">
-           <font>
-            <pointsize>18</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>PushButton</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1">
-         <spacer name="verticalSpacer_13">
+        <item row="8" column="1">
+         <spacer name="verticalSpacer_3">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>40</height>
+            <height>60</height>
            </size>
           </property>
          </spacer>
@@ -215,8 +228,8 @@ color: rgb(243, 243, 243);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1169</width>
-     <height>22</height>
+     <width>1201</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>

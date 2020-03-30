@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'flow.ui'
 #
-# Created by: PyQt5 UI code generator 5.14.1
+# Created by: PyQt5 UI code generator 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -15,7 +15,7 @@ class Ui_flow(object):
         flow.setObjectName("flow")
         flow.resize(879, 682)
         flow.setStyleSheet("background-color: rgb(85, 87, 83);\n"
-                           "color: rgb(243, 243, 243);")
+"color: rgb(194, 255, 189);")
         self.flow_switch_ids = QtWidgets.QComboBox(flow)
         self.flow_switch_ids.setGeometry(QtCore.QRect(10, 10, 301, 31))
         self.flow_switch_ids.setObjectName("flow_switch_ids")

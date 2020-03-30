@@ -15,7 +15,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(85, 87, 83);
-color: rgb(243, 243, 243);</string>
+color: rgb(194, 255, 189);</string>
   </property>
   <widget class="QComboBox" name="flow_switch_ids">
    <property name="geometry">
