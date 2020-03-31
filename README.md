@@ -2,7 +2,7 @@
 
 This project is a GUI client access ryu network manager to control the flows in the swithes networks. By default, using mininet to simulate the swithes network.
 
-Basically, this programm can run any OS but must be with docker env as blow.
+Basically, this programm can run any OS but must be with docker env as blow. Otherwise, you must build mininet environment on VM or linux OS.
 ## 1. Build ryu manager (docker).
 * Pull ryu manager image.
     ```
