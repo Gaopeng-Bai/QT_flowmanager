@@ -121,6 +121,8 @@ class GUI_main(QMainWindow, Ui_MainWindow):
         }
         index = dic[self.sender().objectName()]
         self.sub.setCurrentIndex(index)
+        if index == 1:
+            self.flows_viewer.show_flows()
 
     def ui_init(self):
         """
@@ -363,7 +365,8 @@ class flow_present_window(QMainWindow, Ui_flow):
             temp = []
             if len(self.flows) != 0:
                 for key in self.flows[0].keys():
-                    temp.append(key)
+                    if key != "actions" and key != "match":
+                        temp.append(key)
                 temp = temp[-1:] + temp[:10]
                 self.flow_table_view.setRowCount(len(self.flows))
                 self.flow_table_view.setColumnCount(11)
