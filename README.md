@@ -24,11 +24,13 @@ Basically, this programm can run any OS but must be with docker env as blow. Oth
     ryu-manager {filename in the path of your code}.py        
     ```
 ## 2. Build mininet (docker).
+
 * Under docker-mininet file, run command:
     ```
     docker-compose run --rm mininet
     ```
-    If issue appear, reboot docker host try to solve it.
+    * If issue appear, reboot docker host try to solve it.
+    * Do not build a independent container. Anyway, mininet images only work on this command. That means you need to run this again to start a mininet services. 
 * create a switches network.
     ```
     mn --controller remote,ip={ryu manager ip above}  --switch ovsk,protocols=OpenFlow13 --mac --ipbase=10.1.1.0/24 --topo single,4
@@ -42,3 +44,7 @@ Change the server ip and port to connect ryu server. By default if using docker:
 IP: 127.0.0.1
 Port: 6633
 ```
+
+
+# Reference: 
+* [flowmanager](https://github.com/martimy/flowmanager) depends on web.
