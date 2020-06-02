@@ -1,4 +1,4 @@
-# Own_flowmanager
+# QT_flowmanager
 
 This project is a GUI client access ryu network manager to control the flows in the swithes networks. By default, using mininet to simulate the swithes network.
 
